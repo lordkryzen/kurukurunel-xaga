@@ -165,7 +165,14 @@ int btmtk_disp_notify_cb(struct notifier_block *nb, unsigned long value, void *v
 {
 	int *data = (int *)v;
 	int32_t new_state = 0;
-	struct btmtk_btif_dev *cif_dev = (struct btmtk_btif_dev *)g_sbdev->cif_dev;
+	struct btmtk_btif_dev *cif_dev;
+
+	if (value != MTK_DISP_EARLY_EVENT_BLANK || !data || !g_sbdev)
+		return NOTIFY_DONE;
+	cif_dev = (struct btmtk_btif_dev *)g_sbdev->cif_dev;
+	if (!cif_dev)
+		return NOTIFY_DONE;
+
 	/*
 		MTK_DISP_EARLY_EVENT_BLANK: This event will happen before lcm suspend/resume
 		MTK_DISP_EVENT_BLANK: This event will happen after lcm suspend/resume

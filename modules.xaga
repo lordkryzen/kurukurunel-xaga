@@ -231,6 +231,7 @@ nvt36672c.ko
 nxp_i2c.ko
 p73.ko
 panel-l16-36-02-0b-dsc-vdo.ko
+panel-l16-42-02-0a-dsc-vdo.ko
 pd_cp_manager.ko
 pd_dbg_info.ko
 pda_drv_mt6895.ko
