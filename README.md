@@ -32,5 +32,3 @@ adapter. Upstream attribution, revision and checksum accompany that input.
 ## Known bugs
 
 - **Fuel gauge:** The reported battery percentage can become inaccurate after the phone has been idle for a long time. For example, leaving the phone at 100% overnight (around 12 hours) can result in it reporting roughly 85%, even though actual battery drain appears to be closer to 3%. Connecting the phone to a PC over USB 2.0 seems to make the gauge recalculate its estimate, causing the reported capacity to jump to around 97% within 1–2 minutes. This appears to be a reporting issue rather than actual battery drain. For now, don't rely too heavily on the reported percentage after extended idle periods.
-
-- **USB:** USB functionality is still somewhat unreliable. Some features may not work as expected.
