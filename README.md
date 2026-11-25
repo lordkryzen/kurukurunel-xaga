@@ -21,3 +21,16 @@ Licenses and copyright notices are retained in their respective source trees.
 The XGF estimator uses the pinned MiCode LLVM bitcode object included under its
 `prebuilt/` directory. The current Clang compiles it before linking the kernel
 adapter. Upstream attribution, revision and checksum accompany that input.
+
+> [!CAUTION]
+> **This kernel is designed to be used with my custom vendor image, not the stock vendor.**
+>
+> The vendor image has been heavily modified, particularly around the display and graphics stack. This includes changes to AIDL Composer and Allocator, PQ, DisplayFeature, and other components designed to work together with this kernel.
+>
+> Using this kernel with the stock vendor or another vendor image is likely to cause problems, ranging from broken graphics or a blank display to bootloops. Other vendor configurations are not supported.
+
+## Known bugs
+
+- **Fuel gauge:** The reported battery percentage can become inaccurate after the phone has been idle for a long time. For example, leaving the phone at 100% overnight (around 12 hours) can result in it reporting roughly 85%, even though actual battery drain appears to be closer to 3%. Connecting the phone to a PC over USB 2.0 seems to make the gauge recalculate its estimate, causing the reported capacity to jump to around 97% within 1–2 minutes. This appears to be a reporting issue rather than actual battery drain. For now, don't rely too heavily on the reported percentage after extended idle periods.
+
+- **USB:** USB functionality is still somewhat unreliable. Some features may not work as expected.
