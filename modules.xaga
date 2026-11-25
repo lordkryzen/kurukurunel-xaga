@@ -294,3 +294,5 @@ xhci-mtk-hcd-v2.ko
 xiaomi_touch.ko
 zram.ko
 zsmalloc.ko
+mtk_u_ether.ko
+mtk_usb_f_rndis.ko
