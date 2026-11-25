@@ -2088,15 +2088,20 @@ static int sc8561_init_irq(struct sc8561_device *bq)
 		return -1;
 	}
 
-	ret = request_irq(bq->irq, sc8561_interrupt, IRQF_TRIGGER_FALLING | IRQF_ONESHOT, dev_name(bq->dev), bq);
+	ret = devm_request_irq(bq->dev, bq->irq, sc8561_interrupt, IRQF_TRIGGER_FALLING | IRQF_ONESHOT, dev_name(bq->dev), bq);
 	if (ret < 0) {
 		bq_err("%s failed to request irq\n", bq->log_tag);
 		return -1;
 	}
 
-	enable_irq_wake(bq->irq);
+
 
 	return 0;
+}
+
+static void sc8561_unregister_charger(void *data)
+{
+	charger_device_unregister(data);
 }
 
 static int sc8561_register_charger(struct sc8561_device *bq, int driver_data)
@@ -2133,7 +2138,9 @@ static int sc8561_register_charger(struct sc8561_device *bq, int driver_data)
 		break;
 	}
 
-	return 0;
+	if (IS_ERR(bq->chg_dev))
+		return PTR_ERR(bq->chg_dev);
+	return devm_add_action_or_reset(bq->dev, sc8561_unregister_charger, bq->chg_dev);
 }
 
 static int cp_vbus_get(struct sc8561_device *gm,
@@ -2360,8 +2367,10 @@ static int cp_charge_detect_device(struct sc8561_device *bq)
 		bq->chip_vendor = SC8561;
 	else if (data == LN8410_DEVICE_ID)
 		bq->chip_vendor = LN8410;
-	else
+	else {
 		bq->chip_vendor = UNKNOW;
+		return -ENODEV;
+	}
 
 	return ret;
 }
@@ -2401,6 +2410,7 @@ static int sc8561_probe(struct i2c_client *client)
 	bq->client = client;
 	bq->dev = dev;
 
+	INIT_DELAYED_WORK(&bq->irq_handle_work, sc8561_irq_handler);
 	i2c_set_clientdata(client, bq);
     bq->regmap = devm_regmap_init_i2c(client, &sc8561_regmap_config);
 	if (IS_ERR(bq->regmap)) {
@@ -2449,7 +2459,7 @@ static int sc8561_probe(struct i2c_client *client)
 		return ret;
 	}
 
-	INIT_DELAYED_WORK(&bq->irq_handle_work, sc8561_irq_handler);
+	device_init_wakeup(bq->dev, true);
 	bq->chip_ok = true;
 	//ret = sc8561_dump_important_regs(bq);
 	bq_err("%s %d probe success\n", bq->log_tag, ret);
@@ -2469,7 +2479,7 @@ static int sc8561_suspend(struct device *dev)
 
 	bq_info("%s sc8561 suspend!\n", bq->log_tag);
 
-	return enable_irq_wake(bq->irq);
+	return device_may_wakeup(dev) ? enable_irq_wake(bq->irq) : 0;
 }
 
 static int sc8561_resume(struct device *dev)
@@ -2479,7 +2489,7 @@ static int sc8561_resume(struct device *dev)
 
 	bq_info("%s sc8561 resume!\n", bq->log_tag);
 
-	return disable_irq_wake(bq->irq);
+	return device_may_wakeup(dev) ? disable_irq_wake(bq->irq) : 0;
 }
 
 static const struct dev_pm_ops sc8561_pm_ops = {
@@ -2496,7 +2506,8 @@ static void sc8561_remove(struct i2c_client *client)
 	if (ret)
 		bq_err("%s failed to disable ADC\n", bq->log_tag);
 
-	power_supply_unregister(bq->cp_psy);
+	cancel_delayed_work_sync(&bq->irq_handle_work);
+	device_init_wakeup(bq->dev, false);
 }
 
 static void sc8561_shutdown(struct i2c_client *client)

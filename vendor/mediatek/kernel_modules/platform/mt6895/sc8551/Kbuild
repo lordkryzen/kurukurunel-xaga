@@ -44,7 +44,7 @@ CFLAGS_sc8561.o += -I$(XAGA_ROOT)/drivers/power/supply -iquote$(XAGA_ROOT)/drive
 obj-m += sc8551.o
 
 # Device module selection.
-obj-m := sc8551.o
+obj-m := sc8551.o ln8000_charger.o sc8561.o
 
 # Per-object platform compilation context.
 CFLAGS_sc8551.o += -DCONFIG_TARGET_PRODUCT_XAGA=1

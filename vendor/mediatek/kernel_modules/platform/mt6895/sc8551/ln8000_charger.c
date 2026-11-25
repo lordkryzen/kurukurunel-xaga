@@ -103,7 +103,7 @@ struct mtk_cp_sysfs_field_info {
 		struct mtk_cp_sysfs_field_info *attr, int *val);
 };
 
-static int fake_work_mode = LN8000_SLAVE;
+
 
 static int ln8000_check_work_mode(struct ln8000_info *info, int work_mode)
 {
@@ -1297,21 +1297,6 @@ teminate_work:
 	info->vac_ov_work_on = 0;
 }
 */
-static void check_vac_ov_work(struct ln8000_info *info)
-{
-	unsigned int sys_st, fault1_st;
-
-	ln8000_read_reg(info, LN8000_REG_SYS_STS, &sys_st);
-	ln8000_read_reg(info, LN8000_REG_FAULT1_STS, &fault1_st);
-
-	if (sys_st == 0x02 && fault1_st == 0x00) {  /* connected valid VBUS */
-		if (info->vac_ov_work_on == 0) {        /* vac_ov_work not worked */
-			schedule_delayed_work(&info->vac_ov_work, msecs_to_jiffies(0));
-			info->vac_ov_work_on = 1;
-			ln_info("schedule_work : vac_ov_work\n");
-		}
-	}
-}
 
 static irqreturn_t ln8000_interrupt_handler(int irq, void *data)
 {
@@ -1386,7 +1371,6 @@ static irqreturn_t ln8000_interrupt_handler(int irq, void *data)
 		ln_info("Watchdog timer has expired(wdt_fault=%d)\n", info->wdt_fault);
 	}
 
-	check_vac_ov_work(info);
 
 	return IRQ_HANDLED;
 }
@@ -1467,17 +1451,11 @@ static const struct regmap_config ln8000_regmap_config = {
 static int ln8000_get_dev_role(struct i2c_client *client)
 {
 	const struct of_device_id *of_id;
-	char buf[4];
-	int data = 0;
-	of_id = of_match_device(of_match_ptr(ln8000_dt_match), &client->dev);
-	if (of_id == NULL) {
-		dev_err(&client->dev, "%s: fail to matched of_device_id\n", __func__);
+
+	of_id = of_match_device(ln8000_dt_match, &client->dev);
+	if (!of_id || !of_id->data)
 		return -EINVAL;
-	}
-	sprintf(buf, "%d", *(const int *)of_id->data);
-	memcpy(&data, buf, 4);
-	dev_info(&client->dev, "%s: matched to %s, %d\n", __func__, of_id->compatible, data);
-	return data;
+	return *(const int *)of_id->data;
 }
 
 static int ln8000_parse_dt(struct ln8000_info *info)
@@ -1575,7 +1553,7 @@ static int ln8000_psy_register(struct ln8000_info *info)
 	info->psy_desc.set_property	= ln8000_charger_set_property;
 	info->psy_desc.property_is_writeable = ln8000_charger_is_writeable;
 
-	info->psy_chg = devm_power_supply_register(&info->client->dev, &info->psy_desc, &info->psy_cfg);
+	info->psy_chg = power_supply_register(&info->client->dev, &info->psy_desc, &info->psy_cfg);
 	if (IS_ERR(info->psy_chg)) {
 		ln_err("(%s) failed to register power supply\n", LN8000_ROLE(info));
 		return PTR_ERR(info->psy_chg);
@@ -2025,7 +2003,7 @@ static int ln8000_register_charger(struct ln8000_info *info, int work_mode)
 		return -EINVAL;
 	}
 
-	return 0;
+	return PTR_ERR_OR_ZERO(info->chg_dev);
 }
 
 static int cp_vbus_get(struct ln8000_info *gm,
@@ -2232,18 +2210,21 @@ static int ln8000_probe(struct i2c_client *client)
 			}
 		}
 	}
+	if (ret != LN8000_DEVICE_ID)
+		return -ENODEV;
 	dev_err(&client->dev,"device id=0x%x, addr=0x%x\n", ret, client->addr);
-	info = devm_kzalloc(&client->dev, sizeof(struct ln8000_info), GFP_KERNEL);
+	info = kzalloc(sizeof(*info), GFP_KERNEL);
 	if (info == NULL) {
 		dev_err(&client->dev, "%s: fail to alloc devm for ln8000_info\n", __func__);
 		return -ENOMEM;
 	}
-	info->dev_role = ln8000_get_dev_role(client);
-	if (IS_ERR_VALUE((unsigned long)info->dev_role)) {
+	ret = ln8000_get_dev_role(client);
+	if (ret < 0) {
 		kfree(info);
 		return -EINVAL;
 	}
-	info->pdata = devm_kzalloc(&client->dev, sizeof(struct ln8000_platform_data), GFP_KERNEL);
+	info->dev_role = ret;
+	info->pdata = kzalloc(sizeof(*info->pdata), GFP_KERNEL);
 	if (info->pdata == NULL) {
 		ln_err("fail to alloc devm for ln8000_platform_data\n");
 		kfree(info);
@@ -2267,14 +2248,15 @@ static int ln8000_probe(struct i2c_client *client)
 	if (!match)
 	{
 		ln_err("device tree match not found!")
-		return -ENODEV;
+		ret = -ENODEV;
+		goto err_devmem;
 	}
 
 	info->mode = *(int *)match->data;
 	ret = ln8000_check_work_mode(info, info->mode);
 	if (ret) {
 		ln_err("failed to check work_mode\n");
-		return ret;
+		goto err_devmem;
 	}
 	mutex_init(&info->data_lock);
 	mutex_init(&info->i2c_lock);
@@ -2311,28 +2293,28 @@ static int ln8000_probe(struct i2c_client *client)
 #endif
 	device_init_wakeup(info->dev, 1);
 	/* charger class register */
-	ret = ln8000_register_charger(info, fake_work_mode);
+	ret = ln8000_register_charger(info, info->mode);
 	if (ret) {
 		ln_err("failed to register charger\n");
-		return ret;
+		goto err_psy;
 	}
 	ret = ln8000_create_debugfs_entries(info);
 	if (IS_ERR_VALUE((unsigned long)ret)) {
 		goto err_wakeup;
 	}
 	determine_initial_status(info);
-	fake_work_mode = LN8000_MASTER;
+
 	info->chip_ok = true;
 	ln_err("ln8000 probe success!\n");
 	return 0;
 
 err_wakeup:
-	if (LN8000_IS_PRIMARY(info) && client->irq) {
-		if (info->pdata->irq_gpio) {
-			free_irq(client->irq, info);
-		}
-	}
+	debugfs_remove_recursive(info->debug_root);
+	charger_device_unregister(info->chg_dev);
+	device_init_wakeup(info->dev, false);
+
 err_psy:
+	device_init_wakeup(info->dev, false);
 	power_supply_unregister(info->psy_chg);
 
 err_cleanup:
@@ -2354,12 +2336,8 @@ static void ln8000_remove(struct i2c_client *client)
 	ln8000_change_opmode(info, LN8000_OPMODE_STANDBY);
 
 	debugfs_remove_recursive(info->debug_root);
-
-	if (LN8000_IS_PRIMARY(info) && client->irq) {
-		if (info->pdata->irq_gpio) {
-			free_irq(client->irq, info);
-		}
-	}
+	charger_device_unregister(info->chg_dev);
+	device_init_wakeup(info->dev, false);
 
 	power_supply_unregister(info->psy_chg);
 	i2c_set_clientdata(info->client, NULL);

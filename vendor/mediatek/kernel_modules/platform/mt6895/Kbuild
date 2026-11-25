@@ -5,3 +5,5 @@ obj-m += mtk-aie/ clk-disable-unused/ connscp/ gps-scp/ gz-irq-mod/ gz-log-mod/ 
 obj-m += panel-l16-42-02-0a-dsc-vdo/
 
 obj-$(CONFIG_MTK_USB_CONFIGFS_RNDIS) += usb-rndis/
+
+obj-m += rt6160-xaga/
