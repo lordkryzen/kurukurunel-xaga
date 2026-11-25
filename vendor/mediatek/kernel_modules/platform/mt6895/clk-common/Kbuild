@@ -1,0 +1,14 @@
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += clk-common.o
+clk-common-y := clk-mtk.o clk-pll.o clk-gate.o clk-mux.o clkchk.o clk-fmeter.o mtk-pd-chk.o clkdbg.o
+CFLAGS_clk-mtk.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-pll.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-gate.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-mux.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clkchk.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-fmeter.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_mtk-pd-chk.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clkdbg.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+
+# Device module selection.
+obj-m := clk-common.o

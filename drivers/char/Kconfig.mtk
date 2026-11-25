@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0
+#
+# Character device configuration
+#
+
+source "drivers/char/hw_random/Kconfig.mtk"
+source "drivers/char/rpmb/Kconfig"

@@ -161,6 +161,9 @@ void s2idle_wake(void)
 {
 	unsigned long flags;
 
+	pr_info("XAGA_PM16 WAKE_REQUEST cpu=%u idle_state=%d\n",
+		raw_smp_processor_id(), READ_ONCE(s2idle_state));
+
 	raw_spin_lock_irqsave(&s2idle_lock, flags);
 	if (s2idle_state > S2IDLE_STATE_NONE) {
 		s2idle_state = S2IDLE_STATE_WAKE;
@@ -368,12 +371,16 @@ static int suspend_prepare(suspend_state_t state)
 
 	pm_prepare_console();
 
+	pr_info("XAGA_PM16 NOTIFIERS_BEGIN\n");
 	error = pm_notifier_call_chain_robust(PM_SUSPEND_PREPARE, PM_POST_SUSPEND);
+	pr_info("XAGA_PM16 NOTIFIERS_END ret=%d\n", error);
 	if (error)
 		goto Restore;
 
 	trace_suspend_resume(TPS("freeze_processes"), 0, true);
+	pr_info("XAGA_PM16 FREEZE_BEGIN\n");
 	error = suspend_freeze_processes();
+	pr_info("XAGA_PM16 FREEZE_END ret=%d\n", error);
 	trace_suspend_resume(TPS("freeze_processes"), 0, false);
 	if (!error)
 		return 0;
@@ -413,7 +420,9 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 	if (error)
 		goto Platform_finish;
 
+	pr_info("XAGA_PM16 DEVICES_LATE_BEGIN\n");
 	error = dpm_suspend_late(PMSG_SUSPEND);
+	pr_info("XAGA_PM16 DEVICES_LATE_END ret=%d\n", error);
 	if (error) {
 		last_dev = suspend_stats.last_failed_dev + REC_FAILED_NUM - 1;
 		last_dev %= REC_FAILED_NUM;
@@ -426,7 +435,9 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 	if (error)
 		goto Devices_early_resume;
 
+	pr_info("XAGA_PM16 DEVICES_NOIRQ_BEGIN\n");
 	error = dpm_suspend_noirq(PMSG_SUSPEND);
+	pr_info("XAGA_PM16 DEVICES_NOIRQ_END ret=%d\n", error);
 	if (error) {
 		last_dev = suspend_stats.last_failed_dev + REC_FAILED_NUM - 1;
 		last_dev %= REC_FAILED_NUM;
@@ -443,7 +454,9 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 		goto Platform_wake;
 
 	if (state == PM_SUSPEND_TO_IDLE) {
+		pr_info("XAGA_PM16 S2IDLE_LOOP_BEGIN\n");
 		s2idle_loop();
+		pr_info("XAGA_PM16 S2IDLE_LOOP_END\n");
 		goto Platform_wake;
 	}
 
@@ -484,7 +497,9 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 
  Platform_wake:
 	platform_resume_noirq(state);
+	pr_info("XAGA_PM16 RESUME_NOIRQ_BEGIN\n");
 	dpm_resume_noirq(PMSG_RESUME);
+	pr_info("XAGA_PM16 RESUME_NOIRQ_END\n");
 
  Platform_early_resume:
 	platform_resume_early(state);
@@ -520,7 +535,9 @@ int suspend_devices_and_enter(suspend_state_t state)
 
 	suspend_console();
 	suspend_test_start();
+	pr_info("XAGA_PM16 DEVICES_SUSPEND_BEGIN\n");
 	error = dpm_suspend_start(PMSG_SUSPEND);
+	pr_info("XAGA_PM16 DEVICES_SUSPEND_END ret=%d\n", error);
 	if (error) {
 		pr_err("Some devices failed to suspend, or early wake event detected\n");
 		log_suspend_abort_reason(
@@ -538,7 +555,9 @@ int suspend_devices_and_enter(suspend_state_t state)
  Resume_devices:
 	trace_android_vh_resume_begin(NULL);
 	suspend_test_start();
+	pr_info("XAGA_PM16 RESUME_DEVICES_BEGIN\n");
 	dpm_resume_end(PMSG_RESUME);
+	pr_info("XAGA_PM16 RESUME_DEVICES_END\n");
 	suspend_test_finish("resume devices");
 	trace_suspend_resume(TPS("resume_console"), state, true);
 	resume_console();
@@ -599,7 +618,9 @@ static int enter_state(suspend_state_t state)
 
 	if (sync_on_suspend_enabled) {
 		trace_suspend_resume(TPS("sync_filesystems"), 0, true);
+		pr_info("XAGA_PM16 FILESYSTEM_SYNC_BEGIN\n");
 		ksys_sync_helper();
+		pr_info("XAGA_PM16 FILESYSTEM_SYNC_END\n");
 		trace_suspend_resume(TPS("sync_filesystems"), 0, false);
 	}
 

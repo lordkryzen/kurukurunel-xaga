@@ -1,0 +1,7 @@
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += gz_main_mod.o
+gz_main_mod-y := gz_main.o
+ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/geniezone/public -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/geniezone/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/trusted_mem/public -I$(DEVICE_MODULES_PATH)/drivers/dma-buf/heaps -I$(DEVICE_MODULES_PATH)/arch/arm/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include
+
+# Device module selection.
+obj-m := gz_main_mod.o

@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: GPL-2.0
+
+source "drivers/misc/mediatek/usb/usb_meta/Kconfig"
+source "drivers/misc/mediatek/usb/usb_rndis/Kconfig"
+source "drivers/misc/mediatek/usb/usb_boost/Kconfig"
+source "drivers/misc/mediatek/usb/usb_offload/Kconfig"
+source "drivers/misc/mediatek/usb/usb_sram/Kconfig"
+source "drivers/misc/mediatek/usb/usb_xhci/Kconfig"
+source "drivers/misc/mediatek/usb/usb20/Kconfig"
+source "drivers/misc/mediatek/usb/usb_logger/Kconfig"

@@ -3,7 +3,7 @@
 
 #include <net/xdp_sock_drv.h>
 
-#include "stmmac.h"
+#include "stmmac-mtk.h"
 #include "stmmac_xdp.h"
 
 static int stmmac_xdp_enable_pool(struct stmmac_priv *priv,

@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_wdt.o
+CFLAGS_mtk_wdt.o += -I$(XAGA_ROOT)/drivers/watchdog -iquote$(XAGA_ROOT)/drivers/watchdog -I$(XAGA_ROOT)/drivers/watchdog/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DMTK_WDT_TEST_ENABLED=0

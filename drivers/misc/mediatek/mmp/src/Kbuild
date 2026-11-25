@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mmprofile.o
+CFLAGS_mmprofile.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mmp/src -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mmp/src -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/mmp -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump/include

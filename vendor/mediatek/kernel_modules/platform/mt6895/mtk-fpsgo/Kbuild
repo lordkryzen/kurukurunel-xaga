@@ -1,0 +1,26 @@
+obj-m += mtk_fpsgo.o
+mtk_fpsgo-y := fpsgo_main.o base/src/fpsgo_base.o base/src/fpsgo_sysfs.o base/src/fpsgo_cpu_policy.o composer/src/fps_composer.o fbt/src/fbt_cpu.o fbt/src/fbt_cpu_ctrl.o fbt/src/xgf.o fbt/src/uboost.o fbt/src/thermal_aware.o fbt/platform/fbt_cpu_platform.o fbt/src/mini_top.o fstb/fstb.o gbe/gbe1_main.o gbe/gbe2_main.o gbe/gbe_common.o gbe/gbe_sysfs.o
+ccflags-y += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3  -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-fpsgo -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-fpsgo/mt-plat -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-fpsgo/base/include -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-fpsgo/fbt/include -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-fpsgo/fstb -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-fpsgo/composer/include -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-fpsgo/gbe -I$(XAGA_ROOT)/kernel -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/include -I$(XAGA_ROOT)/drivers/gpu/drm/mediatek/mediatek_v2 -I$(XAGA_ROOT)/drivers/misc/mediatek/include  -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/sched
+ccflags-y += -I$(XAGA_ROOT)/drivers/misc/mediatek/include/mt-plat -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/perf_ioctl
+
+# Device module selection.
+obj-m := mtk_fpsgo.o
+
+# Per-object platform compilation context.
+CFLAGS_fpsgo_main.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fstb/fstb.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_gbe/gbe1_main.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_gbe/gbe2_main.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_gbe/gbe_common.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_gbe/gbe_sysfs.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fbt/platform/fbt_cpu_platform.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fbt/src/fbt_cpu.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fbt/src/fbt_cpu_ctrl.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fbt/src/mini_top.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fbt/src/thermal_aware.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fbt/src/uboost.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_fbt/src/xgf.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_composer/src/fps_composer.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_base/src/fpsgo_base.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_base/src/fpsgo_cpu_policy.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h
+CFLAGS_base/src/fpsgo_sysfs.o += -DNR_FREQ_CPU=32 -DCONFIG_MTK_FPSGO_V3 -include uapi/linux/sched/types.h

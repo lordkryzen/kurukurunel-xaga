@@ -1,0 +1,7 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += irq-dbg.o
+CFLAGS_irq-dbg.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/sda -iquote$(XAGA_ROOT)/drivers/misc/mediatek/sda -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/kernel -I$(XAGA_ROOT)/drivers/misc/mediatek/sda/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := irq-dbg.o

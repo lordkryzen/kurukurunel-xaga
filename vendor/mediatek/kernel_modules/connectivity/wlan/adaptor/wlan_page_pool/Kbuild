@@ -1,0 +1,5 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += wlan_page_pool.o
+wlan_page_pool-y := wifi_page_pool.o
+CFLAGS_wifi_page_pool.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/wlan/adaptor/wlan_page_pool -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/wlan/adaptor/wlan_page_pool -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

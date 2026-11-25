@@ -917,6 +917,15 @@ static inline void ramoops_unregister_dummy(void)
 static void __init ramoops_register_dummy(void)
 {
 	struct ramoops_platform_data pdata;
+	struct device_node *np;
+
+	/* Explicit board storage takes precedence over legacy boot parameters. */
+	for_each_compatible_node(np, NULL, "ramoops") {
+		if (of_device_is_available(np)) {
+			of_node_put(np);
+			return;
+		}
+	}
 
 	if (mem_name) {
 		phys_addr_t start;

@@ -143,6 +143,8 @@ struct media_device_ops {
  *    and @disable_source handlers.
  */
 struct media_device {
+	/* Opt-in for drivers implementing the original request-tail ABI. */
+	bool preserve_legacy_request_fields;
 	/* dev->driver_data points to this struct. */
 	struct device *dev;
 	struct media_devnode *devnode;

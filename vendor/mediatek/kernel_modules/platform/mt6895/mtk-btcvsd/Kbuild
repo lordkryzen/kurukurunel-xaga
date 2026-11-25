@@ -1,0 +1,9 @@
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+CFLAGS_mtk-btcvsd.o += -I$(XAGA_ROOT)/legacy-mt6895-audio/sound/soc/mediatek/common -iquote$(XAGA_ROOT)/legacy-mt6895-audio/sound/soc/mediatek/common -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/audio_ipi/include -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/adsp -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/adsp/include -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/scp/include -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/scp/rv -I$(XAGA_ROOT)/legacy-mt6895-audio/sound/soc/mediatek/audio_dsp -I$(XAGA_ROOT)/legacy-mt6895-audio/sound/soc/mediatek/ultrasound/ultra_common -I$(XAGA_ROOT)/legacy-mt6895-audio/sound/soc/mediatek/ultrasound/ultra_scp -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/elliptic -I$(XAGA_ROOT)/legacy-mt6895-audio/sound/soc/codecs/tfa98xx/inc -I$(XAGA_ROOT)/legacy-mt6895-audio/sound/soc/codecs/richtek -I$(XAGA_ROOT)/drivers/misc/mediatek/include -I$(XAGA_ROOT)/drivers/misc/mediatek/include/mt-plat -I$(XAGA_ROOT)/drivers/misc/mediatek/slbc -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling -I$(XAGA_ROOT)/sound/soc/codecs -I$(XAGA_ROOT)/include/mediatek -I$(XAGA_ROOT)/include/mediatek/uapi -DCONFIG_MFD_MT6397_MODULE=1 -DCONFIG_SND_SOC_MTK_BTCVSD_MODULE=1
+obj-m += mtk-btcvsd.o
+
+# Device module selection.
+obj-m := mtk-btcvsd.o
+
+# Per-object platform compilation context.
+CFLAGS_mtk-btcvsd.o += -DCONFIG_MFD_MT6397_MODULE=1 -DCONFIG_SND_SOC_MTK_BTCVSD_MODULE=1

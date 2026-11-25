@@ -1,0 +1,10 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE := -I$(XAGA_ROOT)/legacy-mt6895-camera/include -I$(XAGA_ROOT)/legacy-mt6895-camera/include/uapi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += imgsensor-glue.o
+CFLAGS_imgsensor-glue.o += -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/misc/mediatek/imgsensor/src-v4l2/imgsensor-glue -iquote$(XAGA_ROOT)/legacy-mt6895-camera/drivers/misc/mediatek/imgsensor/src-v4l2/imgsensor-glue -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/misc/mediatek/imgsensor/inc -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/misc/mediatek/imgsensor/src-v4l2 -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/media/platform/mtk-isp -D__XIAOMI_CAMERA__ -DXAGA_CAM
+
+# Device module selection.
+obj-m := imgsensor-glue.o
+
+# Per-object platform compilation context.
+CFLAGS_imgsensor-glue.o += -D__XIAOMI_CAMERA__ -DXAGA_CAM

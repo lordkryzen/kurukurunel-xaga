@@ -1,0 +1,13 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_slbc.o
+mtk_slbc-y := slbc.o
+obj-m += slbc_trace.o
+obj-m += slbc_ipi.o
+obj-m += mmsram.o
+obj-m += slbc_mt6895.o
+CFLAGS_slbc.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/slbc -iquote$(XAGA_ROOT)/drivers/misc/mediatek/slbc -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/slbc -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_slbc_trace.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/slbc -iquote$(XAGA_ROOT)/drivers/misc/mediatek/slbc -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/slbc -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_slbc_ipi.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/slbc -iquote$(XAGA_ROOT)/drivers/misc/mediatek/slbc -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/slbc -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi
+CFLAGS_mmsram.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/slbc -iquote$(XAGA_ROOT)/drivers/misc/mediatek/slbc -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/mt-plat -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/slbc -I$(srctree)/include -I$(src) -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump/include
+CFLAGS_slbc_mt6895.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/slbc -iquote$(XAGA_ROOT)/drivers/misc/mediatek/slbc -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/mt-plat -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/sspm -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi -I$(DEVICE_MODULES_PATH)/drivers/dma-buf/heaps -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/sspm/v3 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/l3c_part -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/slbc -I$(srctree)/include -I$(src) -I$(XAGA_ROOT)/drivers/misc/mediatek/slbc/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump/include -I$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -I$(XAGA_ROOT)/drivers/dma-buf/heaps -I$(XAGA_ROOT)/drivers/iommu/arm/arm-smmu-v3

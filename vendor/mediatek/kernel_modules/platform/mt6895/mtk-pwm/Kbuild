@@ -1,0 +1,7 @@
+obj-m += mtk-pwm.o
+mtk-pwm-y := mtk_pwm.o mtk_pwm_hal.o
+obj-m += mtk_irtx_pwm.o
+ccflags-y += -I$(src) -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include
+
+# Device module selection.
+obj-m := mtk-pwm.o mtk_irtx_pwm.o

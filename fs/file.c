@@ -668,6 +668,26 @@ int close_fd(unsigned fd)
 }
 EXPORT_SYMBOL(close_fd);
 
+/* Close a driver's exported descriptor only while it still names that file. */
+int close_fd_if_file(unsigned int fd, const struct file *expected)
+{
+	struct files_struct *files = current->files;
+	struct file *file;
+
+	if (!files || !expected)
+		return -EBADF;
+	spin_lock(&files->file_lock);
+	file = files_lookup_fd_locked(files, fd);
+	if (file != expected) {
+		spin_unlock(&files->file_lock);
+		return -EBADF;
+	}
+	file = file_close_fd_locked(files, fd);
+	spin_unlock(&files->file_lock);
+	return filp_close(file, files);
+}
+EXPORT_SYMBOL_GPL(close_fd_if_file);
+
 /**
  * last_fd - return last valid index into fd table
  * @fdt: File descriptor table.

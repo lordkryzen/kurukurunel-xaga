@@ -1,0 +1,4 @@
+obj-m += mux_switch.o
+
+# Device module selection.
+obj-m := mux_switch.o

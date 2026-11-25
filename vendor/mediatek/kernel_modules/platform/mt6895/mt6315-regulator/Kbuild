@@ -1,0 +1,15 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk-dvfsrc-regulator.o
+obj-m += mt6315-regulator.o
+obj-m += mt6363-regulator.o
+obj-m += mt6368-regulator.o
+obj-m += rt5133-regulator.o
+CFLAGS_mtk-dvfsrc-regulator.o += -I$(XAGA_ROOT)/drivers/regulator -iquote$(XAGA_ROOT)/drivers/regulator -I$(srctree)/drivers/regulator -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6315-regulator.o += -I$(XAGA_ROOT)/drivers/regulator -iquote$(XAGA_ROOT)/drivers/regulator -I$(srctree)/drivers/regulator -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6363-regulator.o += -I$(XAGA_ROOT)/drivers/regulator -iquote$(XAGA_ROOT)/drivers/regulator -I$(srctree)/drivers/regulator -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6368-regulator.o += -I$(XAGA_ROOT)/drivers/regulator -iquote$(XAGA_ROOT)/drivers/regulator -I$(srctree)/drivers/regulator -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_rt5133-regulator.o += -I$(XAGA_ROOT)/drivers/regulator -iquote$(XAGA_ROOT)/drivers/regulator -I$(srctree)/drivers/regulator -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/subpmic
+
+# Device module selection.
+obj-m := mt6363-regulator.o mtk-dvfsrc-regulator.o mt6315-regulator.o mt6368-regulator.o rt5133-regulator.o

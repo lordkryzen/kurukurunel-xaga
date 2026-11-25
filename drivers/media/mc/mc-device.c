@@ -9,6 +9,7 @@
  */
 
 #include <linux/compat.h>
+#include <trace/hooks/v4l2mc.h>
 #include <linux/export.h>
 #include <linux/idr.h>
 #include <linux/ioctl.h>
@@ -220,6 +221,14 @@ static long media_device_setup_link(struct media_device *mdev, void *arg)
 				      &sink->pads[linkd->sink.index]);
 	if (link == NULL)
 		return -EINVAL;
+
+	if (mdev->preserve_legacy_request_fields) {
+		int ret = 0;
+
+		trace_android_vh_media_device_setup_link(link, linkd, &ret);
+		if (ret)
+			return ret < 0 ? ret : 0;
+	}
 
 	memset(linkd->reserved, 0, sizeof(linkd->reserved));
 

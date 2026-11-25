@@ -1,0 +1,35 @@
+# Retained xaga firmware uses legacy Trustonic transport, not FF-A.
+include $(src)/Makefile
+obj-m := mcDrvModule.o
+
+# Device module selection.
+obj-m := mcDrvModule.o
+
+# Per-object platform compilation context.
+CFLAGS_admin.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_clock.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_main.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_protocol_fe.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_vlx_be.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_nq.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_xen_be.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_vlx_common.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_raite_be.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_ffa_dummy.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_clientlib.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_xen_fe.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_raite_fe.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_protocol_be.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_client.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_session.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_fastcall.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_mcp.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_xen_common.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_logging.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_teeclientapi.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_vlx_fe.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_iwp.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_protocol.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_raite_common.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_mmu.o += -DNDEBUG -DMTK_ADAPTED
+CFLAGS_user.o += -DNDEBUG -DMTK_ADAPTED

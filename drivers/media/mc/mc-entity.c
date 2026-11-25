@@ -927,6 +927,56 @@ __must_check int media_pipeline_start(struct media_pad *pad,
 }
 EXPORT_SYMBOL_GPL(media_pipeline_start);
 
+static struct media_pipeline_pad *media_pipeline_find_pad(struct media_pad *pad)
+{
+	struct media_pipeline_pad *entry;
+
+	if (!pad->pipe)
+		return NULL;
+	list_for_each_entry(entry, &pad->pipe->pads, list)
+		if (entry->pad == pad)
+			return entry;
+	return NULL;
+}
+
+int media_pipeline_swap_entities(struct media_entity *first,
+				 struct media_entity *second)
+{
+	struct media_device *mdev = first->graph_obj.mdev;
+	unsigned int i;
+	int ret = -EINVAL;
+
+	if (!mdev || mdev != second->graph_obj.mdev || first == second ||
+	    !first->num_pads || first->num_pads != second->num_pads)
+		return -EINVAL;
+	mutex_lock(&mdev->graph_mutex);
+	/* Validate the complete transaction before touching either pipeline. */
+	for (i = 0; i < first->num_pads; i++) {
+		struct media_pad *a = &first->pads[i], *b = &second->pads[i];
+
+		if (a->flags != b->flags || a->sig_type != b->sig_type ||
+		    (a->pipe && !media_pipeline_find_pad(a)) ||
+		    (b->pipe && !media_pipeline_find_pad(b)))
+			goto unlock;
+	}
+	for (i = 0; i < first->num_pads; i++) {
+		struct media_pad *a = &first->pads[i], *b = &second->pads[i];
+		struct media_pipeline_pad *pa = media_pipeline_find_pad(a);
+		struct media_pipeline_pad *pb = media_pipeline_find_pad(b);
+
+		if (pa)
+			pa->pad = b;
+		if (pb)
+			pb->pad = a;
+		swap(a->pipe, b->pipe);
+	}
+	ret = 0;
+unlock:
+	mutex_unlock(&mdev->graph_mutex);
+	return ret;
+}
+EXPORT_SYMBOL_GPL(media_pipeline_swap_entities);
+
 void __media_pipeline_stop(struct media_pad *pad)
 {
 	struct media_pipeline *pipe = pad->pipe;

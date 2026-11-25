@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += p73.o
+CFLAGS_p73.o += -I$(XAGA_ROOT)/legacy-xaga-peripherals/drivers/p73-spi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DDEBUG

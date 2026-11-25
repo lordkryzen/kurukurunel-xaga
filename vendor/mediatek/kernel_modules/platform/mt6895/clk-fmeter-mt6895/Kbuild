@@ -1,0 +1,52 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += clk-common.o
+clk-common-y := clk-mtk.o clk-pll.o clk-gate.o clk-mux.o clkchk.o clk-fmeter.o mtk-pd-chk.o clkdbg.o
+obj-m += clk-bringup.o
+obj-m += clk-mt6895-mfgcfg.o
+CFLAGS_clk-mtk.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-pll.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-gate.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-mux.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clkchk.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-fmeter.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_mtk-pd-chk.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clkdbg.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-bringup.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -iquote$(XAGA_ROOT)/drivers/clk/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_clk-mt6895-mfgcfg.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/include/mediatek
+
+# Published MT6895-specific clock and power-check targets.
+obj-m += clk-mt6895.o
+CFLAGS_clk-mt6895.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-chk-mt6895.o
+clk-chk-mt6895-y := clkchk-mt6895.o
+CFLAGS_clkchk-mt6895.o += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/vcp/include/ -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump  -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/rv_v2 -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/include
+obj-m += clk-fmeter-mt6895.o
+CFLAGS_clk-fmeter-mt6895.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-dbg-mt6895.o
+clk-dbg-mt6895-y := clkdbg-mt6895.o
+CFLAGS_clkdbg-mt6895.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += pd-chk-mt6895.o
+pd-chk-mt6895-y := mtk-pd-chk-mt6895.o
+CFLAGS_mtk-pd-chk-mt6895.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump  -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/rv_v2 -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/include
+obj-m += clk-mt6895-adsp.o
+CFLAGS_clk-mt6895-adsp.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-cam.o
+CFLAGS_clk-mt6895-cam.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-ccu.o
+CFLAGS_clk-mt6895-ccu.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-img.o
+CFLAGS_clk-mt6895-img.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-mmsys.o
+CFLAGS_clk-mt6895-mmsys.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-peri.o
+CFLAGS_clk-mt6895-peri.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-bus.o
+CFLAGS_clk-mt6895-bus.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-mdpsys.o
+CFLAGS_clk-mt6895-mdpsys.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+obj-m += clk-mt6895-vcodec.o
+CFLAGS_clk-mt6895-vcodec.o += -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+
+# Device module selection.
+obj-m := clk-mt6895-img.o clk-mt6895-mdpsys.o clk-mt6895-peri.o clk-mt6895-bus.o clk-mt6895-cam.o clk-mt6895-ccu.o clk-mt6895-adsp.o clk-fmeter-mt6895.o clk-mt6895-mmsys.o clk-mt6895-vcodec.o clk-mt6895.o

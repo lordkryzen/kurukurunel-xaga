@@ -1,0 +1,10 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE := -I$(XAGA_ROOT)/legacy-mt6895-camera/include -I$(XAGA_ROOT)/legacy-mt6895-camera/include/uapi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk-ipesys-me.o
+CFLAGS_mtk-ipesys-me.o += -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/media/platform/mtk-isp/mtk-ipesys-me -iquote$(XAGA_ROOT)/legacy-mt6895-camera/drivers/media/platform/mtk-isp/mtk-ipesys-me -DTF_DUMP_71_1 -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/media/platform/mtk-isp/mtk-hcp -I$(XAGA_ROOT)/drivers/misc/mediatek/cmdq/mailbox -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/media/platform/mtk-isp/imgsys -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/media/platform/mtk-isp/imgsys/platforms -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/media/platform/mtk-isp/imgsys/platforms/isp71 -I$(XAGA_ROOT)/drivers/misc/mediatek/mtk-interconnect -I$(XAGA_ROOT)/drivers/iommu -I$(XAGA_ROOT)/drivers/misc/mediatek/iommu
+
+# Device module selection.
+obj-m := mtk-ipesys-me.o
+
+# Per-object platform compilation context.
+CFLAGS_mtk-ipesys-me.o += -DTF_DUMP_71_1

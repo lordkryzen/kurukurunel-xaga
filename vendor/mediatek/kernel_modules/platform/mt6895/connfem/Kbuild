@@ -1,0 +1,29 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += connfem.o
+connfem-y := connfem_api.o connfem_cfg.o connfem_container.o connfem_dt_parser.o connfem_epaelna.o connfem_module.o connfem_sku.o connfem_subsys_bt.o connfem_subsys_common.o connfem_subsys_wifi.o
+CFLAGS_connfem_api.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_cfg.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_container.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_dt_parser.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_epaelna.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_module.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_sku.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_subsys_bt.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_subsys_common.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_subsys_wifi.o += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -iquote$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/connectivity/connfem/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+
+# Device module selection.
+obj-m := connfem.o
+
+# Per-object platform compilation context.
+CFLAGS_connfem_sku.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_api.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_subsys_wifi.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_dt_parser.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_epaelna.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_cfg.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_module.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_subsys_bt.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_container.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1
+CFLAGS_connfem_subsys_common.o += -DCONNFEM_TEST_ENABLED=0 -DCONNFEM_DBG=1

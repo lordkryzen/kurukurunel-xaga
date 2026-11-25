@@ -1,0 +1,9 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk-ise-mailbox.o
+obj-m += mtk-mbox-mailbox.o
+CFLAGS_mtk-ise-mailbox.o += -I$(XAGA_ROOT)/drivers/mailbox -iquote$(XAGA_ROOT)/drivers/mailbox -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mtk-mbox-mailbox.o += -I$(XAGA_ROOT)/drivers/mailbox -iquote$(XAGA_ROOT)/drivers/mailbox -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := mtk-mbox-mailbox.o

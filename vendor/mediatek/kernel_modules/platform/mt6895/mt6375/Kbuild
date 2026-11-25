@@ -1,0 +1,15 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk-spmi-pmic.o
+obj-m += mtk-spmi-pmic-debug.o
+obj-m += mt6685-core.o
+obj-m += mt6375.o
+obj-m += mt6685-audclk.o
+CFLAGS_mtk-spmi-pmic.o += -I$(XAGA_ROOT)/drivers/mfd -iquote$(XAGA_ROOT)/drivers/mfd  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mtk-spmi-pmic-debug.o += -I$(XAGA_ROOT)/drivers/mfd -iquote$(XAGA_ROOT)/drivers/mfd -I$(DEVICE_MODULES_PATH)/drivers/mfd  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6685-core.o += -I$(XAGA_ROOT)/drivers/mfd -iquote$(XAGA_ROOT)/drivers/mfd -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6375.o += -I$(XAGA_ROOT)/drivers/mfd -iquote$(XAGA_ROOT)/drivers/mfd  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6685-audclk.o += -I$(XAGA_ROOT)/drivers/mfd -iquote$(XAGA_ROOT)/drivers/mfd -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := mt6685-audclk.o mtk-spmi-pmic.o mt6375.o mt6685-core.o

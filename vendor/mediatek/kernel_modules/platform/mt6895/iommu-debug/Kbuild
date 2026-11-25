@@ -1,0 +1,15 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += iommu_secure.o
+iommu_secure-y := iommu-secure.o
+obj-m += iommu_debug.o
+iommu_debug-y := iommu-debug.o mtk-smmu-ela.o
+obj-m += mtk_iommu_util.o
+mtk_iommu_util-y := mtk-iommu-util.o
+CFLAGS_iommu-secure.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/iommu -iquote$(XAGA_ROOT)/drivers/misc/mediatek/iommu -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/iommu/arm/arm-smmu-v3 -I$(XAGA_ROOT)/drivers/iommu
+CFLAGS_iommu-debug.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/iommu -iquote$(XAGA_ROOT)/drivers/misc/mediatek/iommu -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/drivers/iommu/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/iommu -I$(XAGA_ROOT)/drivers/iommu/arm/arm-smmu-v3 -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_mtk-smmu-ela.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/iommu -iquote$(XAGA_ROOT)/drivers/misc/mediatek/iommu -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/drivers/iommu/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/iommu -I$(XAGA_ROOT)/drivers/iommu/arm/arm-smmu-v3 -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_mtk-iommu-util.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/iommu -iquote$(XAGA_ROOT)/drivers/misc/mediatek/iommu -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/iommu -I$(XAGA_ROOT)/drivers/iommu/arm/arm-smmu-v3
+
+# Device module selection.
+obj-m := mtk_iommu_util.o iommu_debug.o iommu_secure.o

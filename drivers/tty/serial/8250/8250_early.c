@@ -23,6 +23,8 @@
  *	console=uart8250,mmio32,0xff5e0000,115200n8
  */
 
+#include <linux/iopoll.h>
+#include <linux/moduleparam.h>
 #include <linux/tty.h>
 #include <linux/init.h>
 #include <linux/console.h>
@@ -76,17 +78,36 @@ static void serial8250_early_out(struct uart_port *port, int offset, int value)
 	}
 }
 
+/* Diagnostic safeguard: a clock-gated UART must not trap printk forever.
+ * Never print recursively here. Other consoles and the printk ring retain
+ * the message even when this early UART cannot transmit it.
+ */
+static struct uart_port *early_failed_port;
+static unsigned long early_tx_timeouts, early_suppressed_chars;
+module_param_named(early_tx_timeouts, early_tx_timeouts, ulong, 0444);
+module_param_named(early_suppressed_chars, early_suppressed_chars, ulong, 0444);
+
 static void serial_putc(struct uart_port *port, unsigned char c)
 {
 	unsigned int status;
+	int ret;
 
-	serial8250_early_out(port, UART_TX, c);
-
-	for (;;) {
+	if (READ_ONCE(early_failed_port) == port) {
 		status = serial8250_early_in(port, UART_LSR);
-		if (uart_lsr_tx_empty(status))
-			break;
-		cpu_relax();
+		if (!uart_lsr_tx_empty(status)) {
+			WRITE_ONCE(early_suppressed_chars,
+				READ_ONCE(early_suppressed_chars) + 1);
+			return;
+		}
+		WRITE_ONCE(early_failed_port, NULL);
+	}
+	serial8250_early_out(port, UART_TX, c);
+	ret = read_poll_timeout_atomic(serial8250_early_in, status,
+				      uart_lsr_tx_empty(status), 1, 10000,
+				      false, port, UART_LSR);
+	if (ret) {
+		WRITE_ONCE(early_tx_timeouts, READ_ONCE(early_tx_timeouts) + 1);
+		WRITE_ONCE(early_failed_port, port);
 	}
 }
 

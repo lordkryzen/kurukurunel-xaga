@@ -186,10 +186,16 @@ __psci_cpu_suspend(u32 fn, u32 state, unsigned long entry_point)
 	bool deny = false;
 
 	trace_android_rvh_psci_cpu_suspend(state, &deny);
+	if (state == 0x01011f01)
+		pr_info("XAGA_PM16 PSCI_HANDOFF cpu=%u state=%#x entry=%#lx deny=%d\n",
+			raw_smp_processor_id(), state, entry_point, deny);
 	if (deny)
 		return -EPERM;
 
 	err = invoke_psci_fn(fn, state, entry_point, 0);
+	if (state == 0x01011f01)
+		pr_info("XAGA_PM16 PSCI_CALL_RETURN cpu=%u state=%#x firmware_ret=%d\n",
+			raw_smp_processor_id(), state, err);
 	return psci_to_linux_errno(err);
 }
 
@@ -482,6 +488,9 @@ int psci_cpu_suspend_enter(u32 state)
 {
 	int ret;
 
+	if (state == 0x01011f01)
+		pr_info("XAGA_PM16 CPU_ENTER cpu=%u state=%#x\n",
+			raw_smp_processor_id(), state);
 	if (!psci_power_state_loses_context(state)) {
 		struct arm_cpuidle_irq_context context;
 
@@ -503,6 +512,9 @@ int psci_cpu_suspend_enter(u32 state)
 			ct_cpuidle_exit();
 	}
 
+	if (state == 0x01011f01)
+		pr_info("XAGA_PM16 CPU_RETURN cpu=%u state=%#x ret=%d\n",
+			raw_smp_processor_id(), state, ret);
 	return ret;
 }
 #endif

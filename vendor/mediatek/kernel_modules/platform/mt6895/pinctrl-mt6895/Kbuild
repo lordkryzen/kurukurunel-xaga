@@ -1,0 +1,16 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += pinctrl-mtk-v2.o
+pinctrl-mtk-v2-y := mtk-eint.o pinctrl-mtk-common-v2.o pinctrl-paris.o
+obj-m += pinctrl-mt6895.o
+obj-m += pinctrl-mt6363.o
+obj-m += pinctrl-mtk-common-v2_debug.o
+CFLAGS_mtk-eint.o += -I$(XAGA_ROOT)/drivers/pinctrl/mediatek -iquote$(XAGA_ROOT)/drivers/pinctrl/mediatek -I$(srctree)/drivers/pinctrl/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_pinctrl-mtk-common-v2.o += -I$(XAGA_ROOT)/drivers/pinctrl/mediatek -iquote$(XAGA_ROOT)/drivers/pinctrl/mediatek -I$(srctree)/drivers/pinctrl/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_pinctrl-paris.o += -I$(XAGA_ROOT)/drivers/pinctrl/mediatek -iquote$(XAGA_ROOT)/drivers/pinctrl/mediatek -I$(srctree)/drivers/pinctrl/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_pinctrl-mt6895.o += -I$(XAGA_ROOT)/drivers/pinctrl/mediatek -iquote$(XAGA_ROOT)/drivers/pinctrl/mediatek -I$(srctree)/drivers/pinctrl/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_pinctrl-mt6363.o += -I$(XAGA_ROOT)/drivers/pinctrl/mediatek -iquote$(XAGA_ROOT)/drivers/pinctrl/mediatek -I$(srctree)/drivers/pinctrl/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_pinctrl-mtk-common-v2_debug.o += -I$(XAGA_ROOT)/drivers/pinctrl/mediatek -iquote$(XAGA_ROOT)/drivers/pinctrl/mediatek -I$(srctree)/drivers/pinctrl/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := pinctrl-mt6895.o pinctrl-mtk-v2.o pinctrl-mtk-common-v2_debug.o

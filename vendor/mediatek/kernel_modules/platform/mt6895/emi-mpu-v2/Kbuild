@@ -1,0 +1,7 @@
+LINUXINCLUDE := -I$(src)/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += emi-mpu.o emi-mpu-v2.o
+emi-mpu-y := emi-mpu-common.o emi-mpu-owner.o emi-mpu-md-callback.o
+ccflags-y += -I$(src)/include -I$(DEVICE_MODULES_PATH)/drivers/memory/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := emi-mpu-v2.o emi-mpu.o

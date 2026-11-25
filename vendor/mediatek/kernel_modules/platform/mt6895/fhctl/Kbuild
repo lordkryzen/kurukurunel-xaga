@@ -1,0 +1,15 @@
+obj-m += fhctl.o
+fhctl-y := clk-fhctl.o clk-fhctl-ap.o clk-fhctl-pll.o clk-fhctl-mcupm.o clk-fhctl-gpueb.o clk-fhctl-debug.o
+ccflags-y += -DUSE_FHCTL_MCUPM -DUSE_FHCTL_GPUEB -I$(src) -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mcupm/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(srctree)/include/mediatek/linux/soc/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/gpu/mediatek/gpueb/include
+ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/clk/mediatek -I$(DEVICE_MODULES_PATH)/drivers/gpu/mediatek/gpueb -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mcupm
+
+# Device module selection.
+obj-m := fhctl.o
+
+# Per-object platform compilation context.
+CFLAGS_clk-fhctl-gpueb.o += -DUSE_FHCTL_MCUPM -DUSE_FHCTL_GPUEB
+CFLAGS_clk-fhctl-mcupm.o += -DUSE_FHCTL_MCUPM -DUSE_FHCTL_GPUEB
+CFLAGS_clk-fhctl.o += -DUSE_FHCTL_MCUPM -DUSE_FHCTL_GPUEB
+CFLAGS_clk-fhctl-pll.o += -DUSE_FHCTL_MCUPM -DUSE_FHCTL_GPUEB
+CFLAGS_clk-fhctl-ap.o += -DUSE_FHCTL_MCUPM -DUSE_FHCTL_GPUEB
+CFLAGS_clk-fhctl-debug.o += -DUSE_FHCTL_MCUPM -DUSE_FHCTL_GPUEB

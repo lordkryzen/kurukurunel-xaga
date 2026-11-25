@@ -1,0 +1,4 @@
+obj-m += arm_dsu_pmu.o
+
+# Device module selection.
+obj-m := arm_dsu_pmu.o

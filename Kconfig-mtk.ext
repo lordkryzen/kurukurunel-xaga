@@ -1,0 +1,143 @@
+# SPDX-License-Identifier: GPL-2.0
+
+config DEVICE_MODULES_ALLOW_BUILTIN
+	bool "allow builtin drivers into kernel image"
+	help
+	  All modules are default built as kernel modules.
+	  Set DEVICE_MODULES_ALLOW_BUILTIN=y to build modules
+	  into the kernel image.
+	  If unsure, say N.
+
+source "drivers/memory/Kconfig.mtk"
+
+source "drivers/edac/Kconfig.mtk"
+
+source "drivers/iio/adc/Kconfig.mtk"
+
+source "drivers/mfd/Kconfig.mtk"
+
+source "drivers/nvmem/Kconfig.mtk"
+
+source "drivers/dma/mediatek/Kconfig.mtk"
+
+source "drivers/ufs/Kconfig.mtk"
+
+source "drivers/char/Kconfig.mtk"
+
+source "drivers/clk/mediatek/Kconfig.mtk"
+
+source "drivers/clocksource/Kconfig.mtk"
+
+source "drivers/cpufreq/Kconfig.mtk"
+
+source "drivers/soc/mediatek/Kconfig.mtk"
+
+source "drivers/watchdog/Kconfig.mtk"
+
+source "drivers/dma-buf/heaps/Kconfig.mtk"
+
+source "drivers/regulator/Kconfig.mtk"
+
+source "drivers/leds/Kconfig.mtk"
+
+source "drivers/pinctrl/mediatek/Kconfig.mtk"
+
+source "drivers/power/supply/Kconfig.mtk"
+
+source "drivers/power/mca/Kconfig"
+
+
+source "drivers/rtc/Kconfig.mtk"
+
+source "drivers/remoteproc/Kconfig.mtk"
+
+source "drivers/rpmsg/Kconfig.mtk"
+
+source "drivers/input/keyboard/Kconfig.mtk"
+
+source "drivers/phy/mediatek/Kconfig.mtk"
+
+source "drivers/thermal/mediatek/Kconfig.mtk"
+
+source "drivers/spmi/Kconfig.mtk"
+
+source "drivers/tty/serial/8250/Kconfig.mtk"
+
+source "drivers/reset/Kconfig.mtk"
+
+source "drivers/mailbox/Kconfig.mtk"
+
+source "drivers/interconnect/Kconfig.mtk"
+
+source "drivers/i2c/busses/Kconfig.mtk"
+
+source "drivers/i3c/master/Kconfig.mtk"
+
+source "drivers/pwm/Kconfig.mtk"
+
+source "drivers/spi/Kconfig.mtk"
+
+source "drivers/iommu/Kconfig.mtk"
+
+source "drivers/tee/Kconfig.mtk"
+
+source "drivers/mmc/host/Kconfig.mtk"
+
+source "drivers/gpu/drm/mediatek/Kconfig.mtk"
+
+source "drivers/input/touchscreen/Kconfig.mtk"
+
+source "drivers/gpu/drm/panel/Kconfig.mtk"
+
+source "drivers/gpu/drm/bridge/Kconfig.mtk"
+
+source "drivers/gpu/mediatek/Kconfig"
+
+source "drivers/media/platform/Kconfig.mtk"
+
+source "drivers/usb/mtu3/Kconfig.mtk"
+
+source "drivers/net/ethernet/stmicro/Kconfig.mtk"
+
+source "drivers/net/phy/Kconfig.mtk"
+
+source "drivers/devfreq/Kconfig.mtk"
+
+source "drivers/misc/mediatek/Kconfig"
+
+source "drivers/misc/xiaomi/Kconfig"
+
+source "sound/soc/codecs/Kconfig.mtk"
+
+source "sound/soc/mediatek/Kconfig.mtk"
+
+source "sound/virtio/Kconfig.mtk"
+
+source "drivers/pci/controller/Kconfig.mtk"
+
+source "drivers/pinctrl/Kconfig.mtk"
+
+source "drivers/media/platform/mtk-isp/Kconfig"
+
+source "fs/f2fs/Kconfig.mtk"
+
+source "arch/arm/Kconfig.mtk"
+
+source "drivers/hypervisor/vm_uos/Kconfig"
+
+source "drivers/hypervisor/sos/Kconfig"
+
+source "drivers/hypervisor/yocto_uos/Kconfig"
+
+source "drivers/hypervisor/nebula/Kconfig"
+
+source "drivers/media/virtio/Kconfig"
+
+source "drivers/video/backlight/Kconfig.mtk"
+
+source "drivers/mihw/Kconfig"
+
+source "drivers/hooks/geniezone_vendor_hooks/Kconfig"
+
+source "drivers/trusty/Kconfig"
+

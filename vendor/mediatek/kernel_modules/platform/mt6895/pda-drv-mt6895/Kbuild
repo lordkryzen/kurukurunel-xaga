@@ -1,0 +1,9 @@
+obj-m += pda_drv_mt6895.o
+pda_drv_mt6895-y := isp_71/camera_pda_mt6895.o
+ccflags-y += -I$(XAGA_ROOT)/legacy-xaga-pda/drivers/misc/mediatek/cameraisp/pda/isp_71 -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/mtk-interconnect -I$(XAGA_ROOT)/drivers/iommu -I$(XAGA_ROOT)/drivers/misc/mediatek/iommu -I$(XAGA_ROOT)/drivers/memory -D__XIAOMI_CAMERA__ -DXAGA_CAM -DPDA_TF_DUMP_71_1
+
+# Device module selection.
+obj-m := pda_drv_mt6895.o
+
+# Per-object platform compilation context.
+CFLAGS_isp_71/camera_pda_mt6895.o += -D__XIAOMI_CAMERA__ -DXAGA_CAM -DPDA_TF_DUMP_71_1

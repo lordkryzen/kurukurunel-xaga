@@ -1,0 +1,10 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mca_sysfs.o
+obj-m += mca_event.o
+obj-m += mca_log.o
+obj-m += mca_charge_mievent.o
+CFLAGS_mca_sysfs.o += -I$(XAGA_ROOT)/drivers/power/mca -iquote$(XAGA_ROOT)/drivers/power/mca -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mca_event.o += -I$(XAGA_ROOT)/drivers/power/mca -iquote$(XAGA_ROOT)/drivers/power/mca -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mca_log.o += -I$(XAGA_ROOT)/drivers/power/mca -iquote$(XAGA_ROOT)/drivers/power/mca -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mca_charge_mievent.o += -I$(XAGA_ROOT)/drivers/power/mca -iquote$(XAGA_ROOT)/drivers/power/mca -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

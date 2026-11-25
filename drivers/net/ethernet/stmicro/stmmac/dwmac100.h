@@ -12,7 +12,7 @@
 #define __DWMAC100_H__
 
 #include <linux/phy.h>
-#include "common.h"
+#include "common-mtk.h"
 
 /*----------------------------------------------------------------------------
  *	 			MAC BLOCK defines

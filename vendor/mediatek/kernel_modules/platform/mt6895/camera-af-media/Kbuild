@@ -1,0 +1,10 @@
+obj-m += dw9800v.o camera_af_media.o
+camera_af_media-y := mtk-composite.o
+ccflags-y += -D__XIAOMI_CAMERA__ -DXAGA_CAM
+
+# Device module selection.
+obj-m := camera_af_media.o
+
+# Per-object platform compilation context.
+CFLAGS_mtk-composite.o += -D__XIAOMI_CAMERA__ -DXAGA_CAM
+CFLAGS_dw9800v.o += -D__XIAOMI_CAMERA__ -DXAGA_CAM

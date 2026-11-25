@@ -1,0 +1,7 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += spi-mt65xx.o
+CFLAGS_spi-mt65xx.o += -I$(XAGA_ROOT)/drivers/spi -iquote$(XAGA_ROOT)/drivers/spi -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/mt-plat/ -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/ -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/mtk-interconnect/ -I$(srctree)/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/sda/include -I$(XAGA_ROOT)/drivers/misc/mediatek/sda -I$(XAGA_ROOT)/drivers/misc/mediatek/blocktag  -I$(XAGA_ROOT)/drivers/ufs 
+
+# Device module selection.
+obj-m := spi-mt65xx.o

@@ -1,0 +1,9 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += fan53870.o
+obj-m += wl2868c.o
+CFLAGS_fan53870.o += -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_wl2868c.o += -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := fan53870.o

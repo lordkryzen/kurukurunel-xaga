@@ -1,0 +1,7 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += snd-soc-mt6368.o
+snd-soc-mt6368-y := mt6368.o
+obj-m += mt6368-accdet.o
+CFLAGS_mt6368.o += -I$(XAGA_ROOT)/sound/soc/codecs -iquote$(XAGA_ROOT)/sound/soc/codecs -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/mfd
+CFLAGS_mt6368-accdet.o += -I$(XAGA_ROOT)/sound/soc/codecs -iquote$(XAGA_ROOT)/sound/soc/codecs -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

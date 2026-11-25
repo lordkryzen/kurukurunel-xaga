@@ -1,0 +1,11 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += nvmem_mtk-devinfo.o
+nvmem_mtk-devinfo-y := mtk-devinfo.o
+obj-m += nvmem-mt635x-efuse.o
+nvmem-mt635x-efuse-y := mt635x-efuse.o
+CFLAGS_mtk-devinfo.o += -I$(XAGA_ROOT)/drivers/nvmem -iquote$(XAGA_ROOT)/drivers/nvmem -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt635x-efuse.o += -I$(XAGA_ROOT)/drivers/nvmem -iquote$(XAGA_ROOT)/drivers/nvmem -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := nvmem-mt635x-efuse.o nvmem_mtk-devinfo.o

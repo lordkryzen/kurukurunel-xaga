@@ -1,0 +1,8 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_dcm.o
+obj-m += mt6895_dcm.o
+mt6895_dcm-y := mt6895_dcm_internal.o mt6895_dcm_autogen.o
+CFLAGS_mtk_dcm.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/dcm -iquote$(XAGA_ROOT)/drivers/misc/mediatek/dcm -I$(XAGA_ROOT)/drivers/misc/mediatek/dcm/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6895_dcm_internal.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/dcm -iquote$(XAGA_ROOT)/drivers/misc/mediatek/dcm -I$(XAGA_ROOT)/drivers/misc/mediatek/dcm/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mt6895_dcm_autogen.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/dcm -iquote$(XAGA_ROOT)/drivers/misc/mediatek/dcm -I$(XAGA_ROOT)/drivers/misc/mediatek/dcm/include -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

@@ -11,6 +11,7 @@
 #include <linux/compat.h>
 #include <linux/mm.h>
 #include <linux/module.h>
+#include <trace/hooks/v4l2core.h>
 #include <linux/slab.h>
 #include <linux/types.h>
 #include <linux/kernel.h>
@@ -1548,6 +1549,11 @@ static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
 		default:
 			if (fmt->description[0])
 				return;
+			trace_android_vh_fill_ext_fmtdesc(fmt, &descr);
+			if (descr) {
+				flags = 0;
+				break;
+			}
 			WARN(1, "Unknown pixelformat 0x%08x\n", fmt->pixelformat);
 			flags = 0;
 			snprintf(fmt->description, sz, "%p4cc",
@@ -1727,6 +1733,23 @@ static int v4l_g_fmt(const struct v4l2_ioctl_ops *ops,
 	return -EINVAL;
 }
 
+static bool v4l_legacy_requests(struct file *file)
+{
+	struct video_device *vfd = video_devdata(file);
+
+	return vfd->v4l2_dev && vfd->v4l2_dev->mdev &&
+		vfd->v4l2_dev->mdev->preserve_legacy_request_fields;
+}
+
+static bool v4l_preserve_legacy_format(struct file *file, struct v4l2_format *format)
+{
+	int preserve = 0;
+
+	if (v4l_legacy_requests(file))
+		trace_android_vh_clear_reserved_fmt_fields(format, &preserve);
+	return preserve != 0;
+}
+
 static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 				struct file *file, void *fh, void *arg)
 {
@@ -1734,6 +1757,7 @@ static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 	struct video_device *vfd = video_devdata(file);
 	int ret = check_fmt(file, p->type);
 	unsigned int i;
+	bool preserve = v4l_preserve_legacy_format(file, p);
 
 	if (ret)
 		return ret;
@@ -1757,8 +1781,9 @@ static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE:
 		if (unlikely(!ops->vidioc_s_fmt_vid_cap_mplane))
 			break;
-		memset_after(p, 0, fmt.pix_mp.xfer_func);
-		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
+		if (!preserve)
+			memset_after(p, 0, fmt.pix_mp.xfer_func);
+		for (i = 0; !preserve && i < p->fmt.pix_mp.num_planes; i++)
 			memset_after(&p->fmt.pix_mp.plane_fmt[i],
 				     0, bytesperline);
 		return ops->vidioc_s_fmt_vid_cap_mplane(file, fh, arg);
@@ -1791,8 +1816,9 @@ static int v4l_s_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE:
 		if (unlikely(!ops->vidioc_s_fmt_vid_out_mplane))
 			break;
-		memset_after(p, 0, fmt.pix_mp.xfer_func);
-		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
+		if (!preserve)
+			memset_after(p, 0, fmt.pix_mp.xfer_func);
+		for (i = 0; !preserve && i < p->fmt.pix_mp.num_planes; i++)
 			memset_after(&p->fmt.pix_mp.plane_fmt[i],
 				     0, bytesperline);
 		return ops->vidioc_s_fmt_vid_out_mplane(file, fh, arg);
@@ -1845,6 +1871,7 @@ static int v4l_try_fmt(const struct v4l2_ioctl_ops *ops,
 	struct video_device *vfd = video_devdata(file);
 	int ret = check_fmt(file, p->type);
 	unsigned int i;
+	bool preserve = v4l_preserve_legacy_format(file, p);
 
 	if (ret)
 		return ret;
@@ -1865,8 +1892,9 @@ static int v4l_try_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE:
 		if (unlikely(!ops->vidioc_try_fmt_vid_cap_mplane))
 			break;
-		memset_after(p, 0, fmt.pix_mp.xfer_func);
-		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
+		if (!preserve)
+			memset_after(p, 0, fmt.pix_mp.xfer_func);
+		for (i = 0; !preserve && i < p->fmt.pix_mp.num_planes; i++)
 			memset_after(&p->fmt.pix_mp.plane_fmt[i],
 				     0, bytesperline);
 		return ops->vidioc_try_fmt_vid_cap_mplane(file, fh, arg);
@@ -1899,8 +1927,9 @@ static int v4l_try_fmt(const struct v4l2_ioctl_ops *ops,
 	case V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE:
 		if (unlikely(!ops->vidioc_try_fmt_vid_out_mplane))
 			break;
-		memset_after(p, 0, fmt.pix_mp.xfer_func);
-		for (i = 0; i < p->fmt.pix_mp.num_planes; i++)
+		if (!preserve)
+			memset_after(p, 0, fmt.pix_mp.xfer_func);
+		for (i = 0; !preserve && i < p->fmt.pix_mp.num_planes; i++)
 			memset_after(&p->fmt.pix_mp.plane_fmt[i],
 				     0, bytesperline);
 		return ops->vidioc_try_fmt_vid_out_mplane(file, fh, arg);
@@ -3256,7 +3285,7 @@ static unsigned int video_translate_cmd(unsigned int cmd)
 	return cmd;
 }
 
-static int video_get_user(void __user *arg, void *parg,
+static int video_get_user(struct file *file, void __user *arg, void *parg,
 			  unsigned int real_cmd, unsigned int cmd,
 			  bool *always_copy)
 {
@@ -3281,6 +3310,14 @@ static int video_get_user(void __user *arg, void *parg,
 
 		if (flags & INFO_FL_CLEAR_MASK)
 			n = (flags & INFO_FL_CLEAR_MASK) >> 16;
+		if (v4l_legacy_requests(file)) {
+			int legacy_size = n;
+
+			trace_android_vh_clear_mask_adjust(real_cmd, &legacy_size);
+			if (legacy_size < 0 || legacy_size > _IOC_SIZE(real_cmd))
+				return -EINVAL;
+			n = legacy_size;
+		}
 		*always_copy = flags & INFO_FL_ALWAYS_COPY;
 	}
 
@@ -3430,7 +3467,7 @@ video_usercopy(struct file *file, unsigned int orig_cmd, unsigned long arg,
 			parg = mbuf;
 		}
 
-		err = video_get_user((void __user *)arg, parg, cmd,
+		err = video_get_user(file, (void __user *)arg, parg, cmd,
 				     orig_cmd, &always_copy);
 		if (err)
 			goto out;

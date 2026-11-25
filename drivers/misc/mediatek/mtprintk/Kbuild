@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_printk_ctrl.o
+CFLAGS_mtk_printk_ctrl.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mtprintk -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mtprintk -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/mt-plat/ -I$(srctree)/kernel/ -I$(XAGA_ROOT)/drivers/misc/mediatek/mtprintk/uapi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump/include

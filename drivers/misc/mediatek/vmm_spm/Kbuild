@@ -1,0 +1,5 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_vmm_spm.o
+mtk_vmm_spm-y := mtk-vmm-spm.o
+CFLAGS_mtk-vmm-spm.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/vmm_spm -iquote$(XAGA_ROOT)/drivers/misc/mediatek/vmm_spm -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

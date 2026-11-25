@@ -1,0 +1,39 @@
+obj-m += isee.o
+isee-y := tee/tee_native_shm.o tee/tee_core.o tee/capi_proxy.o tee/tee_client_api.o tee/tee_shm.o tee/tee_shm_pool.o tee/soter/core.o tee/soter/call.o ut_keymaster/ut_keymaster.o tz_driver/teei_fp.o tz_driver/teei_client_transfer_data.o tz_driver/teei_smc_call.o tz_driver/sysfs.o tz_driver/teei_cancel_cmd.o tz_driver/fdrv.o tz_driver/notify_queue.o tz_driver/switch_queue.o tz_driver/teei_keymaster.o tz_driver/teei_task_link.o tz_driver/tz_log.o tz_driver/irq_register.o tz_driver/teei_client_main.o tz_driver/backward_driver.o tz_vfs/fp_vendor.o tz_vfs/vfsFun.o tz_dcih/tz_dcih_test.o tz_dcih/tz_dcih.o teei_fp/fp_func.o tee/tee_kernel_ioctl.o
+ccflags-y += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/isee/common/include -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/isee/tz_dcih -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/isee/public -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/isee/tz_driver/include -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/isee/tee -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/isee/tee/soter -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/isee/teei_fp -I$(srctree) -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/mtprof
+
+ccflags-y += -DUT_DMA_ZONE
+
+# Device module selection.
+obj-m := isee.o
+
+# Per-object platform compilation context.
+CFLAGS_teei_fp/fp_func.o += -DUT_DMA_ZONE
+CFLAGS_tee/tee_native_shm.o += -DUT_DMA_ZONE
+CFLAGS_tee/tee_client_api.o += -DUT_DMA_ZONE
+CFLAGS_tee/tee_shm.o += -DUT_DMA_ZONE
+CFLAGS_tee/tee_shm_pool.o += -DUT_DMA_ZONE
+CFLAGS_tee/tee_kernel_ioctl.o += -DUT_DMA_ZONE
+CFLAGS_tee/capi_proxy.o += -DUT_DMA_ZONE
+CFLAGS_tee/tee_core.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/teei_cancel_cmd.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/sysfs.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/tz_log.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/fdrv.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/teei_keymaster.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/teei_client_transfer_data.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/switch_queue.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/notify_queue.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/teei_fp.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/teei_task_link.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/backward_driver.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/teei_smc_call.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/irq_register.o += -DUT_DMA_ZONE
+CFLAGS_tz_driver/teei_client_main.o += -DUT_DMA_ZONE
+CFLAGS_tz_vfs/vfsFun.o += -DUT_DMA_ZONE
+CFLAGS_tz_vfs/fp_vendor.o += -DUT_DMA_ZONE
+CFLAGS_ut_keymaster/ut_keymaster.o += -DUT_DMA_ZONE
+CFLAGS_tz_dcih/tz_dcih.o += -DUT_DMA_ZONE
+CFLAGS_tz_dcih/tz_dcih_test.o += -DUT_DMA_ZONE
+CFLAGS_tee/soter/call.o += -DUT_DMA_ZONE
+CFLAGS_tee/soter/core.o += -DUT_DMA_ZONE

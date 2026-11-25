@@ -5,7 +5,7 @@
 #include <linux/kernel.h>
 #include <linux/types.h>
 
-#include "bcache_ondisk.h"
+#include "bcache_ondisk-mtk.h"
 
 #define BCH_FEATURE_COMPAT		0
 #define BCH_FEATURE_RO_COMPAT		1

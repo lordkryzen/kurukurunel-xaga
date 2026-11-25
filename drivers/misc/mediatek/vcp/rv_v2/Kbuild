@@ -1,0 +1,5 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += vcp_status_v2.o
+vcp_status_v2-y := vcp_status.o
+CFLAGS_vcp_status.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/rv_v2 -iquote$(XAGA_ROOT)/drivers/misc/mediatek/vcp/rv_v2 -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/rv_v2 -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/include

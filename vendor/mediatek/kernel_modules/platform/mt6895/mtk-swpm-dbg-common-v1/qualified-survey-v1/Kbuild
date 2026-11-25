@@ -1,0 +1,5 @@
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+ccflags-y += -I$(src)/inc -I$(src)/modules/debug/v6895 -I$(src)/modules/include/v6895 -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/stack-integrated-modules/sspm -Wall -Werror
+obj-m += mtk-swpm-perf-arm-pmu.o mtk-swpm-contract-survey.o
+mtk-swpm-perf-arm-pmu-y := swpm_perf_arm_pmu.o
+mtk-swpm-contract-survey-y := swpm_contract_survey.o

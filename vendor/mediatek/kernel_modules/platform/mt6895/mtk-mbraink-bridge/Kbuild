@@ -1,0 +1,19 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_mbraink_bridge.o
+mtk_mbraink_bridge-y := mbraink_bridge.o mbraink_bridge_gps.o mbraink_bridge_wifi.o mbraink_bridge_camera.o mbraink_bridge_hrt.o
+CFLAGS_mbraink_bridge.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_gps.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_wifi.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_camera.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_hrt.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mbraink/bridge -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+
+# Device module selection.
+obj-m := mtk_mbraink_bridge.o
+
+# Per-object platform compilation context.
+CFLAGS_mbraink_bridge.o += -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_camera.o += -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_hrt.o += -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_wifi.o += -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0
+CFLAGS_mbraink_bridge_gps.o += -DMTK_MBRAINK_BRIDGE_TEST_ENABLED=0

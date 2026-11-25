@@ -1,0 +1,10 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += gf_spi_tee.o
+CFLAGS_gf_spi_tee.o += -I$(XAGA_ROOT)/legacy-xaga-tee/drivers/tee/teei/400/common/include -I$(XAGA_ROOT)/legacy-xaga-tee/drivers/tee/teei/400/tz_driver/include -I$(XAGA_ROOT)/drivers/gpu/drm/mediatek/mediatek_v2/mi_disp -DCONFIG_PRODUCT_RUBENS_FP
+
+# Device module selection.
+obj-m := gf_spi_tee.o
+
+# Per-object platform compilation context.
+CFLAGS_gf_spi_tee.o += -DCONFIG_PRODUCT_RUBENS_FP

@@ -13,6 +13,7 @@
 #include <linux/leds.h>
 #include <linux/mm.h>
 #include <linux/module.h>
+#include <trace/hooks/v4l2core.h>
 #include <linux/overflow.h>
 #include <linux/slab.h>
 #include <linux/string.h>
@@ -37,6 +38,7 @@
 #define V4L2_SUBDEV_MAX_STREAM_ID 63
 
 #include "v4l2-subdev-priv.h"
+#include "v4l2-subdev-legacy.h"
 
 #if defined(CONFIG_VIDEO_V4L2_SUBDEV_API)
 static int subdev_fh_init(struct v4l2_subdev_fh *fh, struct v4l2_subdev *sd)
@@ -593,6 +595,12 @@ subdev_ioctl_get_state(struct v4l2_subdev *sd, struct v4l2_subdev_fh *subdev_fh,
 			     v4l2_subdev_get_unlocked_active_state(sd);
 }
 
+static bool subdev_legacy_requests(const struct v4l2_subdev *sd)
+{
+	return sd->v4l2_dev && sd->v4l2_dev->mdev &&
+		sd->v4l2_dev->mdev->preserve_legacy_request_fields;
+}
+
 static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg,
 			    struct v4l2_subdev_state *state)
 {
@@ -742,6 +750,9 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg,
 		if (format->which != V4L2_SUBDEV_FORMAT_TRY && ro_subdev)
 			return -EPERM;
 
+		if (subdev_legacy_requests(sd) && !client_supports_streams)
+			return v4l2_subdev_legacy_set_fmt(sd, state, format);
+
 		if (!client_supports_streams)
 			format->stream = 0;
 
@@ -833,6 +844,12 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg,
 	case VIDIOC_SUBDEV_S_FRAME_INTERVAL: {
 		struct v4l2_subdev_frame_interval *fi = arg;
 
+		if (subdev_legacy_requests(sd) && !client_supports_streams) {
+			/* Original tail[0] carries TRY/ACTIVE, not a stream ID. */
+			if (fi->stream != V4L2_SUBDEV_FORMAT_TRY && ro_subdev)
+				return -EPERM;
+			return v4l2_subdev_legacy_set_frame_interval(sd, fi);
+		}
 		if (!client_supports_streams)
 			fi->stream = 0;
 
@@ -870,6 +887,9 @@ static long subdev_do_ioctl(struct file *file, unsigned int cmd, void *arg,
 
 		if (sel->which != V4L2_SUBDEV_FORMAT_TRY && ro_subdev)
 			return -EPERM;
+
+		if (subdev_legacy_requests(sd) && !client_supports_streams)
+			return v4l2_subdev_legacy_set_selection(sd, state, sel);
 
 		if (!client_supports_streams)
 			sel->stream = 0;

@@ -1,0 +1,13 @@
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_jpeg.o
+mtk_jpeg-y := v4l2/mtk_jpeg_core.o v4l2/mtk_jpeg_dec_hw.o v4l2/mtk_jpeg_dec_parse.o v4l2/mtk_jpeg_enc_hw.o
+obj-m += jpeg-driver.o
+jpeg-driver-y := hybrid/jpeg_drv.o hybrid/jpeg_dma_buf.o
+ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/mtk-interconnect -I$(DEVICE_MODULES_PATH)/drivers/iommu/arm/arm-smmu-v3 -I$(DEVICE_MODULES_PATH)/drivers/dma-buf/heaps
+
+ccflags-y += -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/vcp/rv
+ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/vcp/include
+
+# Device module selection.
+obj-m := mtk_jpeg.o jpeg-driver.o

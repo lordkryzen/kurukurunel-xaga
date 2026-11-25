@@ -1,0 +1,55 @@
+ccflags-y += -I$(src)/include
+ccflags-y += -DMTK_LPM_MODE_MODULE -I$(src) -I$(src)/inc -I$(src)/platform -I$(src)/mtk_lpm_fs -I$(src)/lpm_trace_event -I$(src)/inc/lpm_trace_event
+obj-m += mtk-lpm.o
+mtk-lpm-y := lpm_module.o lpm_call.o lpm_registry.o mtk_lpm_fs/mtk_cpuidle_sysfs.o mtk_lpm_fs/mtk_lp_sysfs.o mtk_lpm_fs/mtk_suspend_sysfs.o mtk_lpm_fs/mtk_spm_sysfs.o mtk_lpm_fs/mtk_lpm_sysfs.o mtk_lpm_fs/mtk_lp_sysfs_procfs.o platform/lpm_platform.o platform/lpm_irqremain.o platform/lpm_resource_ctrl.o platform/lpm_rc.o platform/lpm_trace.o lpm_trace_event/lpm_trace_event.o
+
+ccflags-y += -I$(src)/modules/include -I$(src)/modules/include/mt6895 -I$(src)/modules/debug/v1 -I$(src)/modules/debug/cpc_v3 -I$(src)/modules/debug/mt6895 -I$(src)/modules/platform/v1 -I$(src)/modules/platform/suspend_v1
+obj-m += mtk-lpm-dbg-common-v1.o
+mtk-lpm-dbg-common-v1-y := modules/debug/v1/lpm_dbg_cpuidle_status.o modules/debug/v1/mtk_cpupm_dbg.o modules/debug/v1/lpm_dbg_cpuidle_control.o modules/debug/v1/lpm_dbg_cpuidle_fs.o modules/debug/v1/lpm_dbg_cpuidle_profile.o modules/debug/v1/lpm_dbg_cpuidle_state.o modules/debug/v1/lpm_dbg_fs_common.o modules/debug/v1/lpm_dbg_trace.o modules/debug/v1/lpm_dbg_logger.o modules/debug/v1/lpm_dbg_rc_fs.o modules/debug/v1/lpm_dbg_timer.o modules/debug/v1/lpm_dbg_pm.o modules/debug/v1/lpm_pwr_gs.o modules/debug/cpc_v3/mtk_dbg_cpuidle_cpc.o modules/debug/cpc_v3/mtk_cpuidle_cpc.o modules/debug/v1/gs/v1/lpm_pwr_gs_common.o modules/debug/v1/gs/v1/lpm_pwr_gs_dump_clk.o modules/debug/v1/gs/v1/lpm_pwr_gs_dump_pmic.o
+obj-m += mtk-lpm-dbg-mt6895.o
+mtk-lpm-dbg-mt6895-y := modules/debug/mt6895/mt6895_dbg_init.o modules/debug/mt6895/mt6895_dbg_fs.o modules/debug/mt6895/mt6895_dbg_spm_fs.o modules/debug/mt6895/mt6895_lpm_logger.o modules/debug/mt6895/mt6895_lpm_trace_event.o
+
+ccflags-y +=  -I$(src)/modules/debug/v1/gs/v1 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/mt-plat
+
+# Device module selection.
+obj-m := mtk-lpm-dbg-mt6895.o mtk-lpm-dbg-common-v1.o
+
+# Per-object platform compilation context.
+CFLAGS_lpm_call.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_lpm_module.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_lpm_registry.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_lpm_trace_event/lpm_trace_event.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_mtk_lpm_fs/mtk_cpuidle_sysfs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_mtk_lpm_fs/mtk_lpm_sysfs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_mtk_lpm_fs/mtk_lp_sysfs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_mtk_lpm_fs/mtk_lp_sysfs_procfs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_mtk_lpm_fs/mtk_spm_sysfs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_mtk_lpm_fs/mtk_suspend_sysfs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_platform/lpm_irqremain.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_platform/lpm_platform.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_platform/lpm_rc.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_platform/lpm_resource_ctrl.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_platform/lpm_trace.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/cpc_v3/mtk_cpuidle_cpc.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/cpc_v3/mtk_dbg_cpuidle_cpc.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/mt6895/mt6895_dbg_fs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/mt6895/mt6895_dbg_init.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/mt6895/mt6895_dbg_spm_fs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/mt6895/mt6895_lpm_logger.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/mt6895/mt6895_lpm_trace_event.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_cpuidle_control.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_cpuidle_fs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_cpuidle_profile.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_cpuidle_state.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_cpuidle_status.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_fs_common.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_logger.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_pm.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_rc_fs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_timer.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_dbg_trace.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/lpm_pwr_gs.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/mtk_cpupm_dbg.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/gs/v1/lpm_pwr_gs_common.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/gs/v1/lpm_pwr_gs_dump_clk.o += -DMTK_LPM_MODE_MODULE -include linux/of.h
+CFLAGS_modules/debug/v1/gs/v1/lpm_pwr_gs_dump_pmic.o += -DMTK_LPM_MODE_MODULE -include linux/of.h

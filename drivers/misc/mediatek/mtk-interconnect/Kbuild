@@ -1,0 +1,5 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk-icc-core.o
+mtk-icc-core-y := core.o
+CFLAGS_core.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/mtk-interconnect -iquote$(XAGA_ROOT)/drivers/misc/mediatek/mtk-interconnect -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

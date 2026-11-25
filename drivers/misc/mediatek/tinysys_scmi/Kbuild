@@ -1,0 +1,6 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += tinysys-scmi.o
+tinysys-scmi-y := tinysys-scmi-drv.o tinysys.o
+CFLAGS_tinysys-scmi-drv.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi -iquote$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/drivers/firmware/arm_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DTINYSYS_SCMI_DEBUG
+CFLAGS_tinysys.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi -iquote$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/drivers/firmware/arm_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DTINYSYS_SCMI_DEBUG

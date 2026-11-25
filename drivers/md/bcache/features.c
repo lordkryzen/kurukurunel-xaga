@@ -6,8 +6,8 @@
  * Copyright 2020 Coly Li <colyli@suse.de>
  *
  */
-#include "bcache_ondisk.h"
-#include "bcache.h"
+#include "bcache_ondisk-mtk.h"
+#include "bcache-mtk.h"
 #include "features.h"
 
 struct feature {

@@ -1,0 +1,8 @@
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += vdec-fmt.o
+vdec-fmt-y := vdec_fmt_driver.o vdec_fmt_pm.o vdec_fmt_dmabuf.o vdec_fmt_sync.o
+ccflags-y += -I$(src) -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/iommu -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/mtk-interconnect -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/cmdq/mailbox -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/iommu -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/mmdvfs
+
+# Device module selection.
+obj-m := vdec-fmt.o

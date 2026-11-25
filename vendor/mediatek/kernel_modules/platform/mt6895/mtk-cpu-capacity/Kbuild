@@ -1,0 +1,4 @@
+obj-m += mtk_cpu_capacity.o
+
+# Device module selection.
+obj-m := mtk_cpu_capacity.o

@@ -1,0 +1,8 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += device-apc-common.o
+device-apc-common-y := devapc-mtk-multi-ao.o
+obj-m += device-apc-mt6895.o
+device-apc-mt6895-y := devapc-mt6895.o
+CFLAGS_devapc-mtk-multi-ao.o += -I$(XAGA_ROOT)/drivers/soc/mediatek/devapc -iquote$(XAGA_ROOT)/drivers/soc/mediatek/devapc -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump  -DDBG_ENABLE=1
+CFLAGS_devapc-mt6895.o += -I$(XAGA_ROOT)/drivers/soc/mediatek/devapc -iquote$(XAGA_ROOT)/drivers/soc/mediatek/devapc -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump  -DDBG_ENABLE=1

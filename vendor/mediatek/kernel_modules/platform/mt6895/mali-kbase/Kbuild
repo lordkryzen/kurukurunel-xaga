@@ -1,0 +1,394 @@
+# Generated from pinned Xiaomi a16w MT6895 BUILD.bazel.
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mali_kbase.o
+mali_kbase-y := mali_kbase_as_fault_debugfs.o \
+	mali_kbase_cache_policy.o \
+	mali_kbase_ccswe.o \
+	mali_kbase_config.o \
+	mali_kbase_core_linux.o \
+	mali_kbase_ctx_sched.o \
+	mali_kbase_debug.o \
+	mali_kbase_debug_mem_allocs.o \
+	mali_kbase_debug_mem_view.o \
+	mali_kbase_debug_mem_zones.o \
+	mali_kbase_debugfs_helper.o \
+	mali_kbase_disjoint_events.o \
+	mali_kbase_dvfs_debugfs.o \
+	mali_kbase_gator_api.o \
+	mali_kbase_gpu_memory_debugfs.o \
+	mali_kbase_gpuprops.o \
+	mali_kbase_hw.o \
+	mali_kbase_io.o \
+	mali_kbase_kinstr_prfcnt.o \
+	mali_kbase_mem.o \
+	mali_kbase_mem_linux.o \
+	mali_kbase_mem_migrate.o \
+	mali_kbase_mem_pool.o \
+	mali_kbase_mem_pool_debugfs.o \
+	mali_kbase_mem_pool_group.o \
+	mali_kbase_mem_profile_debugfs.o \
+	mali_kbase_native_mgm.o \
+	mali_kbase_pbha.o \
+	mali_kbase_platform_fake.o \
+	mali_kbase_pm.o \
+	mali_kbase_reg_track.o \
+	mali_kbase_smc.o \
+	mali_kbase_softjobs.o \
+	mali_kbase_trace_gpu_mem.o \
+	mali_power_gpu_frequency_trace.o \
+	mi_event.o \
+	arbiter/mali_kbase_arbif.o \
+	arbiter/mali_kbase_arbiter_pm.o \
+	backend/gpu/mali_kbase_cache_policy_backend.o \
+	backend/gpu/mali_kbase_clk_rate_trace_mgr.o \
+	backend/gpu/mali_kbase_gpuprops_backend.o \
+	backend/gpu/mali_kbase_irq_linux.o \
+	backend/gpu/mali_kbase_l2_mmu_config.o \
+	backend/gpu/mali_kbase_pm_always_on.o \
+	backend/gpu/mali_kbase_pm_backend.o \
+	backend/gpu/mali_kbase_pm_ca.o \
+	backend/gpu/mali_kbase_pm_coarse_demand.o \
+	backend/gpu/mali_kbase_pm_driver.o \
+	backend/gpu/mali_kbase_pm_metrics.o \
+	backend/gpu/mali_kbase_pm_policy.o \
+	backend/gpu/mali_kbase_time.o \
+	context/backend/mali_kbase_context_csf.o \
+	context/mali_kbase_context.o \
+	csf/ipa_control/mali_kbase_csf_ipa_control.o \
+	csf/mali_kbase_csf.o \
+	csf/mali_kbase_csf_cpu_queue.o \
+	csf/mali_kbase_csf_cpu_queue_debugfs.o \
+	csf/mali_kbase_csf_csg.o \
+	csf/mali_kbase_csf_csg_debugfs.o \
+	csf/mali_kbase_csf_db_validation.o \
+	csf/mali_kbase_csf_db_validation_test.o \
+	csf/mali_kbase_csf_event.o \
+	csf/mali_kbase_csf_firmware_cfg.o \
+	csf/mali_kbase_csf_firmware_core_dump.o \
+	csf/mali_kbase_csf_firmware_log.o \
+	csf/mali_kbase_csf_heap_context_alloc.o \
+	csf/mali_kbase_csf_kcpu.o \
+	csf/mali_kbase_csf_kcpu_debugfs.o \
+	csf/mali_kbase_csf_kcpu_fence_debugfs.o \
+	csf/mali_kbase_csf_mcu_shared_reg.o \
+	csf/mali_kbase_csf_ne_debugfs.o \
+	csf/mali_kbase_csf_protected_memory.o \
+	csf/mali_kbase_csf_reset_gpu.o \
+	csf/mali_kbase_csf_scheduler.o \
+	csf/mali_kbase_csf_sync.o \
+	csf/mali_kbase_csf_sync_debugfs.o \
+	csf/mali_kbase_csf_tiler_heap.o \
+	csf/mali_kbase_csf_tiler_heap_debugfs.o \
+	csf/mali_kbase_csf_tiler_heap_reclaim.o \
+	csf/mali_kbase_csf_timeout.o \
+	csf/mali_kbase_csf_tl_reader.o \
+	csf/mali_kbase_csf_trace_buffer.o \
+	csf/mali_kbase_csf_util.o \
+	debug/backend/mali_kbase_debug_ktrace_csf.o \
+	debug/mali_kbase_debug_ktrace.o \
+	device/backend/mali_kbase_device_csf.o \
+	device/backend/mali_kbase_device_hw_csf.o \
+	device/mali_kbase_device.o \
+	device/mali_kbase_device_hw.o \
+	gpu/backend/mali_kbase_gpu_fault_csf.o \
+	gpu/mali_kbase_gpu.o \
+	hw_access/mali_kbase_hw_access.o \
+	hw_access/regmap/mali_kbase_regmap_csf.o \
+	hwcnt/backend/mali_kbase_hwcnt_backend_csf.o \
+	hwcnt/backend/mali_kbase_hwcnt_backend_csf_if_fw.o \
+	hwcnt/mali_kbase_hwcnt.o \
+	hwcnt/mali_kbase_hwcnt_gpu.o \
+	hwcnt/mali_kbase_hwcnt_types.o \
+	hwcnt/mali_kbase_hwcnt_virtualizer.o \
+	hwcnt/mali_kbase_hwcnt_watchdog_if_timer.o \
+	mmu/backend/mali_kbase_mmu_csf.o \
+	mmu/backend/mali_kbase_mmu_faults_decoder_luts_csf.o \
+	mmu/mali_kbase_mmu.o \
+	mmu/mali_kbase_mmu_faults_decoder.o \
+	mmu/mali_kbase_mmu_faults_decoder_luts.o \
+	mmu/mali_kbase_mmu_hw_direct.o \
+	mmu/mali_kbase_mmu_mode_aarch64.o \
+	thirdparty/mali_kbase_mmap.o \
+	tl/backend/mali_kbase_timeline_csf.o \
+	tl/mali_kbase_timeline.o \
+	tl/mali_kbase_timeline_io.o \
+	tl/mali_kbase_tlstream.o \
+	tl/mali_kbase_tracepoints.o \
+	platform/mt6895/mali_kbase_config_mt6895.o \
+	platform/mtk_platform_common/mtk_gpu_power_model_sspm_ipi.o \
+	platform/mtk_platform_common/mtk_ltr_pmu.o \
+	platform/mtk_platform_common/mtk_mfg_counter.o \
+	platform/mtk_platform_common/mtk_platform_common.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_fw_analysis.o \
+	platform/mtk_platform_common/mtk_platform_devfreq_governor.o \
+	platform/mtk_platform_common/mtk_platform_devfreq_thermal.o \
+	mali_kbase_pbha_debugfs.o \
+	csf/mali_kbase_debug_csf_fault.o \
+	ipa/mali_kbase_ipa_debugfs.o \
+	mali_kbase_fence_ops.o \
+	mali_kbase_sync_file.o \
+	mali_kbase_sync_common.o \
+	mali_power_gpu_work_period_trace.o \
+	mali_kbase_gpu_metrics.o \
+	csf/mali_kbase_csf_firmware.o \
+	csf/mali_kbase_csf_fw_io.o \
+	hw_access/backend/mali_kbase_hw_access_real_hw.o \
+	backend/gpu/mali_kbase_devfreq.o \
+	ipa/mali_kbase_ipa_simple.o \
+	ipa/mali_kbase_ipa.o \
+	ipa/backend/mali_kbase_ipa_counter_csf.o \
+	ipa/backend/mali_kbase_ipa_counter_common_csf.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_csg.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_cpu.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_kcpu.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_gpu.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_gpu_debugfs.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_infra_status.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_pm_status.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_iter_cshw.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_queue_data.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_as_status.o \
+	platform/mtk_platform_common/mtk_platform_debug_dump_gic.o \
+	platform/mtk_platform_common/mtk_platform_dvfs.o \
+	platform/mtk_platform_common/mtk_platform_debug_memory.o \
+	platform/mtk_platform_common/mtk_platform_whitebox_memory_footprint.o \
+	platform/mtk_platform_common/mtk_platform_memtrack.o \
+	platform/mtk_platform_common/mtk_platform_diagnosis_mode.o \
+	platform/mtk_platform_common/mtk_platform_logbuffer.o
+ccflags-y += -I$(srctree)/drivers/devfreq \
+	-Wall \
+	-Werror \
+	-Wextra \
+	-Wunused \
+	-Wno-unused-parameter \
+	-Wmissing-declarations \
+	-Wno-missing-prototypes \
+	-Wold-style-definition \
+	-Wunused-const-variable \
+	-Wno-sign-compare \
+	-Wno-shift-negative-value \
+	-Wno-cast-function-type \
+	-Wframe-larger-than=4096 \
+	-Wdisabled-optimization \
+	-Wno-missing-field-initializers \
+	-Wno-type-limits \
+	-Wno-unused-macros \
+	-Wno-unused-variable \
+	-Wno-unused-function \
+	-Wno-unused-but-set-variable \
+	-Wno-visibility \
+	-I$(srctree)/include \
+	-I$(srctree)/drivers/iommu \
+	-I$(srctree)/drivers/staging/android \
+	-I$(srctree)/drivers/staging/android/ion \
+	-I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/mt-plat \
+	-I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/arbiter \
+	 \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/backend/gpu \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/context \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/csf \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/csf/ipa_control \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/debug \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/debug/backend \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/device \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/gpu \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/hw_access \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/hw_access/regmap \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/hwcnt \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/hwcnt/backend \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/ipa \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/ipa/backend \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/mmu \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/mmu/backend \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/thirdparty \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/tl \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/include \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/include/linux \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/platform \
+	 \
+	 \
+	-I$(XAGA_ROOT)/drivers/gpu/mediatek/ged/include \
+	-I$(XAGA_ROOT)/drivers/gpu/mediatek/gpu_pdma/include \
+	-I$(XAGA_ROOT)/drivers/gpu/mediatek/gpueb/include \
+	-I$(XAGA_ROOT)/drivers/gpu/mediatek/gpufreq \
+	-I$(XAGA_ROOT)/drivers/gpu/mediatek/gpufreq/v2/include \
+	-I$(XAGA_ROOT)/drivers/gpu/mediatek/mt-plat \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/perf_common \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/trusted_mem \
+	-I$(XAGA_ROOT)/drivers/dma-buf/heaps \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/public \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/sda/include \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/slbc \
+	-I$(XAGA_ROOT)/drivers/misc/mediatek/irq_monitor \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/platform/mt6895 \
+	-I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/gpu/gpu_mali/mali_avalon/a16w/drivers/gpu/arm/midgard/platform/mtk_platform_common \
+	-D'MALI_COVERAGE=0' \
+	-D'MALI_JIT_PRESSURE_LIMIT_BASE=0' \
+	-D'MALI_RELEASE_NAME="r54p1-11eac0"' \
+	-D'MALI_UNIT_TEST=0' \
+	-D'MALI_CUSTOMER_RELEASE=0' \
+	-D'MALI_KERNEL_TEST_API=0'
+
+# Device module selection.
+obj-m := mali_kbase.o
+
+# Per-object platform compilation context.
+CFLAGS_mali_kbase_smc.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_sync_common.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_io.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_mem_profile_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_kinstr_prfcnt.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_fence_ops.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_mem_pool_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_softjobs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_gpuprops.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_mem.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_mem_migrate.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_ccswe.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_debugfs_helper.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_pbha_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_native_mgm.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_mem_pool.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_platform_fake.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_cache_policy.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_power_gpu_frequency_trace.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_as_fault_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_config.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_core_linux.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_mem_linux.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_dvfs_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_trace_gpu_mem.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_hw.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_gpu_metrics.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_ctx_sched.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_power_gpu_work_period_trace.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_pm.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_debug_mem_view.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_disjoint_events.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_gator_api.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_gpu_memory_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_debug_mem_zones.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_sync_file.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_pbha.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_mem_pool_group.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_debug_mem_allocs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_reg_track.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mali_kbase_debug.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mi_event.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_context/mali_kbase_context.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_gpu/mali_kbase_gpu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mmu/mali_kbase_mmu_hw_direct.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mmu/mali_kbase_mmu_faults_decoder.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mmu/mali_kbase_mmu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mmu/mali_kbase_mmu_mode_aarch64.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mmu/mali_kbase_mmu_faults_decoder_luts.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_tl/mali_kbase_timeline.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_tl/mali_kbase_tlstream.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_tl/mali_kbase_timeline_io.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_tl/mali_kbase_tracepoints.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hwcnt/mali_kbase_hwcnt_virtualizer.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hwcnt/mali_kbase_hwcnt_types.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hwcnt/mali_kbase_hwcnt_gpu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hwcnt/mali_kbase_hwcnt.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hwcnt/mali_kbase_hwcnt_watchdog_if_timer.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_thirdparty/mali_kbase_mmap.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hw_access/mali_kbase_hw_access.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_arbiter/mali_kbase_arbif.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_arbiter/mali_kbase_arbiter_pm.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_debug/mali_kbase_debug_ktrace.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_tiler_heap.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_csg_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_firmware.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_trace_buffer.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_kcpu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_tl_reader.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_fw_io.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_db_validation.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_sync.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_csg.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_firmware_core_dump.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_util.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_tiler_heap_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_reset_gpu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_firmware_cfg.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_cpu_queue.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_db_validation_test.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_kcpu_fence_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_protected_memory.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_event.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_ne_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_scheduler.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_cpu_queue_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_timeout.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_firmware_log.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_tiler_heap_reclaim.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_debug_csf_fault.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_sync_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_mcu_shared_reg.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_heap_context_alloc.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/mali_kbase_csf_kcpu_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_device/mali_kbase_device_hw.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_device/mali_kbase_device.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_ipa/mali_kbase_ipa.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_ipa/mali_kbase_ipa_simple.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_ipa/mali_kbase_ipa_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_ipa/backend/mali_kbase_ipa_counter_common_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_ipa/backend/mali_kbase_ipa_counter_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_device/backend/mali_kbase_device_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_device/backend/mali_kbase_device_hw_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_csf/ipa_control/mali_kbase_csf_ipa_control.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_debug/backend/mali_kbase_debug_ktrace_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_pm_coarse_demand.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_pm_driver.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_cache_policy_backend.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_time.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_devfreq.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_pm_ca.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_pm_metrics.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_pm_policy.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_clk_rate_trace_mgr.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_gpuprops_backend.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_pm_always_on.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_irq_linux.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_l2_mmu_config.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_backend/gpu/mali_kbase_pm_backend.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hw_access/backend/mali_kbase_hw_access_real_hw.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hw_access/regmap/mali_kbase_regmap_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hwcnt/backend/mali_kbase_hwcnt_backend_csf_if_fw.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_hwcnt/backend/mali_kbase_hwcnt_backend_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_tl/backend/mali_kbase_timeline_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mt6895/mali_kbase_config_mt6895.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_diagnosis_mode.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_gpu_debugfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_iter_cshw.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_memtrack.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_pm_status.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_queue_data.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_cpu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_gic.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_devfreq_governor.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_memory.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_common.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_gpu_power_model_sspm_ipi.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_as_status.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_infra_status.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_logbuffer.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_gpu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_mfg_counter.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_ltr_pmu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_csg.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_kcpu.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_whitebox_memory_footprint.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_debug_dump_fw_analysis.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_devfreq_thermal.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_platform/mtk_platform_common/mtk_platform_dvfs.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mmu/backend/mali_kbase_mmu_faults_decoder_luts_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_mmu/backend/mali_kbase_mmu_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_gpu/backend/mali_kbase_gpu_fault_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0
+CFLAGS_context/backend/mali_kbase_context_csf.o += -DMALI_COVERAGE=0 -DMALI_JIT_PRESSURE_LIMIT_BASE=0 '-DMALI_RELEASE_NAME="r54p1-11eac0"' -DMALI_UNIT_TEST=0 -DMALI_CUSTOMER_RELEASE=0 -DMALI_KERNEL_TEST_API=0

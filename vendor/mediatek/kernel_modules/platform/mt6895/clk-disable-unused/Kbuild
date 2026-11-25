@@ -1,0 +1,4 @@
+obj-m += clk-disable-unused.o
+
+# Device module selection.
+obj-m := clk-disable-unused.o

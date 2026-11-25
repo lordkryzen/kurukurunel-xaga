@@ -1,0 +1,5 @@
+obj-m += bq28z610.o
+CFLAGS_bq28z610.o += -I$(XAGA_ROOT)/drivers/power/supply -iquote$(XAGA_ROOT)/drivers/power/supply -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/power_throttling -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/typec/tcpc/inc -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/usb/usb20/ -I$(DEVICE_MODULES_PATH)/drivers/power/supply/ufcs -I$(DEVICE_MODULES_PATH)/drivers/power/mca -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/power/mca
+
+# Device module selection.
+obj-m := bq28z610.o

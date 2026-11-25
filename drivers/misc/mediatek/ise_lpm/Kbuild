@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += ise_lpm.o
+CFLAGS_ise_lpm.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/ise_lpm -iquote$(XAGA_ROOT)/drivers/misc/mediatek/ise_lpm -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi/ -I$(srctree)/include/mediatek/linux/soc/mediatek/ -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/mt-plat/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi

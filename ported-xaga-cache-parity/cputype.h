@@ -1,0 +1,1 @@
+../drivers/misc/mediatek/sda/include/cputype.h

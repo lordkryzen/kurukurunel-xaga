@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += reset-ti-syscon.o
+CFLAGS_reset-ti-syscon.o += -I$(XAGA_ROOT)/drivers/reset -iquote$(XAGA_ROOT)/drivers/reset -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

@@ -1,0 +1,8 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += 8250_mtk.o
+CFLAGS_8250_mtk.o += -I$(XAGA_ROOT)/drivers/tty/serial/8250 -iquote$(XAGA_ROOT)/drivers/tty/serial/8250 -I$(srctree)/$(src) -I$(srctree)/drivers/tty/serial/8250 -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/sda/include -I$(XAGA_ROOT)/drivers/misc/mediatek/sda -I$(XAGA_ROOT)/drivers/dma/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/uarthub/common
+ccflags-y += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-uart-apdma -I$(srctree)/drivers/dma -I$(srctree)/drivers/tty/serial/8250
+
+# Device module selection.
+obj-m := 8250_mtk.o

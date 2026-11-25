@@ -9,7 +9,7 @@
 #define __DWMAC1000_H__
 
 #include <linux/phy.h>
-#include "common.h"
+#include "common-mtk.h"
 
 #define GMAC_CONTROL		0x00000000	/* Configuration */
 #define GMAC_FRAME_FILTER	0x00000004	/* Frame Filter */

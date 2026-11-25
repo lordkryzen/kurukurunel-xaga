@@ -1,0 +1,6 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE := -I$(XAGA_ROOT)/legacy-mt6895-camera/include -I$(XAGA_ROOT)/legacy-mt6895-camera/include/uapi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += ccd_rpmsg.o
+ccd_rpmsg-y := mtk_ccd_rpmsg.o mtk_ccd_rpmsg_ipi.o
+CFLAGS_mtk_ccd_rpmsg.o += -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/rpmsg -iquote$(XAGA_ROOT)/legacy-mt6895-camera/drivers/rpmsg -I$(XAGA_ROOT)/legacy-mt6895-camera/include -I$(XAGA_ROOT)/legacy-mt6895-camera/include/uapi -I$(srctree)/drivers/rpmsg -I$(XAGA_ROOT)/drivers/misc/mediatek/include -I$(XAGA_ROOT)/include/mediatek -I$(XAGA_ROOT)/include/mediatek/uapi
+CFLAGS_mtk_ccd_rpmsg_ipi.o += -I$(XAGA_ROOT)/legacy-mt6895-camera/drivers/rpmsg -iquote$(XAGA_ROOT)/legacy-mt6895-camera/drivers/rpmsg -I$(XAGA_ROOT)/legacy-mt6895-camera/include -I$(XAGA_ROOT)/legacy-mt6895-camera/include/uapi -I$(srctree)/drivers/rpmsg -I$(XAGA_ROOT)/drivers/misc/mediatek/include -I$(XAGA_ROOT)/include/mediatek -I$(XAGA_ROOT)/include/mediatek/uapi

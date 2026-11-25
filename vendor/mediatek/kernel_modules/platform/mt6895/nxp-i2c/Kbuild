@@ -1,0 +1,15 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += nxp_i2c.o
+nxp_i2c-y := common.o common_ese.o i2c_drv.o
+CFLAGS_common.o += -I$(XAGA_ROOT)/legacy-xaga-peripherals/drivers/nfc/nxp-i2c -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DDEBUG
+CFLAGS_common_ese.o += -I$(XAGA_ROOT)/legacy-xaga-peripherals/drivers/nfc/nxp-i2c -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DDEBUG
+CFLAGS_i2c_drv.o += -I$(XAGA_ROOT)/legacy-xaga-peripherals/drivers/nfc/nxp-i2c -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -DDEBUG
+
+# Device module selection.
+obj-m := nxp_i2c.o
+
+# Per-object platform compilation context.
+CFLAGS_common.o += -DDEBUG
+CFLAGS_common_ese.o += -DDEBUG
+CFLAGS_i2c_drv.o += -DDEBUG

@@ -1,0 +1,20 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE := -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/stack-integrated-modules/emi-owner/clients/include  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_dramc.o
+mtk_dramc-y := dramc.o dramc_bin.o
+obj-m += emi.o
+emi-y := emi_legacy/emi_legacy_v2/emi-cen.o emi_legacy/emi_legacy_v2/emi-isu.o emi_legacy/emi_legacy_v2/emi-dbg.o
+obj-m += emi-slb.o
+emi-slb-y := emi_legacy/emi_legacy_v2/mtk-emi-slb.o
+emi-mpu-y := emi_legacy/emi_legacy_v2/mtk-emi-mpu.o
+CFLAGS_dramc.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_dramc_bin.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_emi_legacy/emi_legacy_v2/emi-cen.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_emi_legacy/emi_legacy_v2/emi-isu.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_emi_legacy/emi_legacy_v2/emi-dbg.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_emi_legacy/emi_legacy_v2/mtk-emi-slb.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_emi_legacy/emi_legacy_v2/mtk-emi-mpu.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek/soc/mediatek/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+CFLAGS_smpu.o += -I$(XAGA_ROOT)/drivers/memory/mediatek -iquote$(XAGA_ROOT)/drivers/memory/mediatek -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek/soc/mediatek/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump 
+
+# Device module selection.
+obj-m := mtk_dramc.o emi.o

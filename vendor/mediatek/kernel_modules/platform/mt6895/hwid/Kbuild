@@ -1,0 +1,7 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += hwid.o
+CFLAGS_hwid.o += -I$(XAGA_ROOT)/drivers/misc/hwid -iquote$(XAGA_ROOT)/drivers/misc/hwid -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := hwid.o

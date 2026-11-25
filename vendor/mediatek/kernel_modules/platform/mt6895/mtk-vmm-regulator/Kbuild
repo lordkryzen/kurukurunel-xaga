@@ -1,0 +1,5 @@
+obj-m += mtk-vmm-regulator.o
+ccflags-y += -I$(src) -I$(srctree)/drivers/regulator -I$(DEVICE_MODULES_PATH)/legacy-mt6895-camera/drivers/remoteproc
+
+# Device module selection.
+obj-m := mtk-vmm-regulator.o

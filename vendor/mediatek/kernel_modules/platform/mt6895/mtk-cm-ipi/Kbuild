@@ -1,0 +1,6 @@
+obj-m += mtk_cm_mgr.o mtk_cm_mgr_mt6895.o mtk_cm_ipi.o
+mtk_cm_mgr-y := mtk_cm_mgr_common.o
+ccflags-y += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-cm-ipi -I$(XAGA_ROOT)/include/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/include/mt-plat -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi -I$(XAGA_ROOT)/drivers/gpu/drm/mediatek/mediatek_v2
+
+# Device module selection.
+obj-m := mtk_cm_mgr.o mtk_cm_mgr_mt6895.o mtk_cm_ipi.o

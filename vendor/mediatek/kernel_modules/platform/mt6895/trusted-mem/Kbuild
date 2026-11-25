@@ -1,0 +1,27 @@
+# Xaga reference uses the original Geniezone backend: no memory-ffa-enabled DT node.
+# Preserve the published Makefile source lists and flags; select one provider.
+include $(src)/Makefile
+obj-m := trusted_mem.o
+
+# Device module selection.
+obj-m := trusted_mem.o
+
+# Per-object platform compilation context.
+CFLAGS_proc.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_peer_mgr.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_entry.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_ssmr_mgr.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_alloc_api.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_dev_mgr.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_ssheap_proc.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_tee_devices.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_region_mgr.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_mtee_devices.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_mtee_impl/mtee_ops.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_mtee_impl/mtee_invoke.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_mtee_impl/tmem_carveout_heap.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_ssmr/memory_ssmr.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_tmemperf/tmemperf.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_ssheap/ssheap_lib.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_tee_impl/tee_invoke.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT
+CFLAGS_tee_impl/tee_ops.o += -DTEE_DEVICES_SUPPORT -DMTEE_DEVICES_SUPPORT

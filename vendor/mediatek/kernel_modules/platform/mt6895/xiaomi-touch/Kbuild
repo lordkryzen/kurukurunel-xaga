@@ -1,0 +1,4 @@
+obj-m += xiaomi_touch.o
+
+# Device module selection.
+obj-m := xiaomi_touch.o

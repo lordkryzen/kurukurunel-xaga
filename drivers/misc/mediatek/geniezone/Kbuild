@@ -1,0 +1,8 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += gz_tz_system.o
+gz_tz_system-y := dummy.o mtee-kree/kree_mem.o mtee-kree/tz_mmap.o tz_system.o
+CFLAGS_dummy.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -iquote$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/gz-trusty -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/public -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/include -DCONFIG_TEE=0
+CFLAGS_mtee-kree/kree_mem.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -iquote$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/gz-trusty -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/public -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/include -DCONFIG_TEE=0
+CFLAGS_mtee-kree/tz_mmap.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -iquote$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/gz-trusty -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/public -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/include -DCONFIG_TEE=0
+CFLAGS_tz_system.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -iquote$(XAGA_ROOT)/drivers/misc/mediatek/geniezone -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/gz-trusty -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/public -I$(XAGA_ROOT)/drivers/misc/mediatek/geniezone/include -DCONFIG_TEE=0

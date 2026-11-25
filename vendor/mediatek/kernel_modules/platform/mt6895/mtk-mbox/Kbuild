@@ -1,0 +1,8 @@
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_tinysys_ipi.o mtk_rpmsg_mbox.o mtk-mbox.o
+CFLAGS_mtk_tinysys_ipi.o += -I$(XAGA_ROOT)/drivers/soc/mediatek -iquote$(XAGA_ROOT)/drivers/soc/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mtk_rpmsg_mbox.o += -I$(XAGA_ROOT)/drivers/rpmsg -iquote$(XAGA_ROOT)/drivers/rpmsg -I$(srctree)/drivers/rpmsg -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_mtk-mbox.o += -I$(XAGA_ROOT)/drivers/soc/mediatek -iquote$(XAGA_ROOT)/drivers/soc/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := mtk_rpmsg_mbox.o mtk-mbox.o mtk_tinysys_ipi.o

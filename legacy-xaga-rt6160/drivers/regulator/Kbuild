@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += rt6160-regulator.o
+CFLAGS_rt6160-regulator.o += -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

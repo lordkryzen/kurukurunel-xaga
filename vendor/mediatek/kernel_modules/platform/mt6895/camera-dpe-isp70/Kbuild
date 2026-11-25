@@ -1,0 +1,11 @@
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += camera_dpe_isp70.o
+camera_dpe_isp70-y := camera_dpe.o engine_request.o
+ccflags-y += -I$(src) -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/cmdq/mailbox -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/cmdq/mailbox/mt6895 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/mmp
+
+
+
+
+
+# Device module selection.
+obj-m := camera_dpe_isp70.o

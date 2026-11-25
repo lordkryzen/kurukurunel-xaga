@@ -1,0 +1,6 @@
+obj-m += extcon_mtk_usb.o
+extcon_mtk_usb-y := extcon-mtk-usb.o
+ccflags-y += -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/charger-ntc-policy -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/adapter-class/inc
+
+# Device module selection.
+obj-m := extcon_mtk_usb.o

@@ -896,6 +896,7 @@ static int set_irq_wake_real(unsigned int irq, unsigned int on)
  */
 int irq_set_irq_wake(unsigned int irq, unsigned int on)
 {
+	unsigned int wake_depth;
 	unsigned long flags;
 	struct irq_desc *desc = irq_get_desc_buslock(irq, &flags, IRQ_GET_DESC_CHECK_GLOBAL);
 	int ret = 0;
@@ -933,7 +934,10 @@ int irq_set_irq_wake(unsigned int irq, unsigned int on)
 	}
 
 out_unlock:
+	wake_depth = desc->wake_depth;
 	irq_put_desc_busunlock(desc, flags);
+	pr_info("XAGA_PM16 IRQ_WAKE irq=%u on=%u ret=%d depth=%u\n",
+		irq, on, ret, wake_depth);
 	return ret;
 }
 EXPORT_SYMBOL(irq_set_irq_wake);

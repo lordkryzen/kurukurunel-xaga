@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += ak7375c.o
+CFLAGS_ak7375c.o += -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -D__XIAOMI_CAMERA__ -DXAGA_CAM

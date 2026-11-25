@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += ccmni.o
+CFLAGS_ccmni.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/ccmni -iquote$(XAGA_ROOT)/drivers/misc/mediatek/ccmni -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/eccci/inc/ -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/c2k_ccci/ -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/rps -I$(XAGA_ROOT)/drivers/misc/mediatek/eccci -I$(XAGA_ROOT)/drivers/misc/mediatek/eccci/inc

@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk-dvfsrc-devfreq.o
+CFLAGS_mtk-dvfsrc-devfreq.o += -I$(XAGA_ROOT)/drivers/devfreq -iquote$(XAGA_ROOT)/drivers/devfreq -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

@@ -1044,6 +1044,10 @@ static inline bool media_entity_is_streaming(const struct media_entity *entity)
  */
 struct media_pipeline *media_entity_pipeline(struct media_entity *entity);
 
+/* Swap equivalent sensor interfaces without losing pipeline pad membership. */
+int media_pipeline_swap_entities(struct media_entity *first,
+				 struct media_entity *second);
+
 /**
  * media_pad_pipeline - Get the media pipeline a pad is part of
  * @pad: The pad

@@ -1,0 +1,10 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += sspm_v3.o
+sspm_v3-y := sspm_helper.o sspm_logger_impl.o sspm_plt.o sspm_reservedmem.o sspm_sysfs.o sspm_timesync.o
+CFLAGS_sspm_helper.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -iquote$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi
+CFLAGS_sspm_logger_impl.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -iquote$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi
+CFLAGS_sspm_plt.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -iquote$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi
+CFLAGS_sspm_reservedmem.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -iquote$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi
+CFLAGS_sspm_sysfs.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -iquote$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi
+CFLAGS_sspm_timesync.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -iquote$(XAGA_ROOT)/drivers/misc/mediatek/sspm/v3 -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/tinysys_scmi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi

@@ -1,0 +1,8 @@
+LINUXINCLUDE := -I$(XAGA_ROOT)/legacy-mt6895-camera/include -I$(XAGA_ROOT)/legacy-mt6895-camera/include/uapi -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_aie.o
+mtk_aie-y := mtk_aie_53.o mtk_aie_drv.o
+ccflags-y += -Werror -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/platform/mt6895/mtk-aie -I$(XAGA_ROOT)/drivers/misc/mediatek/mtk-interconnect -I$(XAGA_ROOT)/drivers/misc/mediatek/cmdq/mailbox -I$(XAGA_ROOT)/drivers/dma-buf/heaps -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/camera-imgsys-metadata -I$(XAGA_ROOT)/drivers/misc/mediatek/include/mt-plat -I$(XAGA_ROOT)/drivers/misc/mediatek/include -I$(XAGA_ROOT)/drivers/iommu
+ccflags-y += -fdiagnostics-parseable-fixits -ferror-limit=0
+
+# Device module selection.
+obj-m := mtk_aie.o

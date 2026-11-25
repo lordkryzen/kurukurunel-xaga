@@ -1,0 +1,8 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += phy-mtk-ufs.o
+obj-m += phy-mtk-xsphy.o
+obj-m += phy-mtk-tphy.o
+CFLAGS_phy-mtk-ufs.o += -I$(XAGA_ROOT)/drivers/phy/mediatek -iquote$(XAGA_ROOT)/drivers/phy/mediatek -I$(srctree)/drivers/ufs -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/ufs -I$(XAGA_ROOT)/drivers/char/rpmb -I$(XAGA_ROOT)/drivers/char/rpmb/drrpmb_gp/public -I$(XAGA_ROOT)/drivers/mailbox -I$(XAGA_ROOT)/drivers/misc/mediatek/blocktag -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump/include -I$(XAGA_ROOT)/drivers/ufs/include -I$(XAGA_ROOT)/drivers/mmc/host -I$(XAGA_ROOT)/drivers/misc/mediatek/ise_lpm -I$(XAGA_ROOT)/drivers/misc/mediatek/tinysys_scmi -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/mbraink -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling/include -I$(XAGA_ROOT)/drivers/misc/mediatek/sda/include -I$(XAGA_ROOT)/drivers/misc/mediatek/sda -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed
+CFLAGS_phy-mtk-xsphy.o += -I$(XAGA_ROOT)/drivers/phy/mediatek -iquote$(XAGA_ROOT)/drivers/phy/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_phy-mtk-tphy.o += -I$(XAGA_ROOT)/drivers/phy/mediatek -iquote$(XAGA_ROOT)/drivers/phy/mediatek -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

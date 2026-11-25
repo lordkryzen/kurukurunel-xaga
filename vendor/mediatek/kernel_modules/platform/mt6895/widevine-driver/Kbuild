@@ -1,0 +1,6 @@
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += widevine_driver.o
+ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/dma-buf/heaps
+
+# Device module selection.
+obj-m := widevine_driver.o

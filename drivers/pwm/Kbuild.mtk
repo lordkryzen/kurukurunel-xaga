@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += pwm-mtk-disp.o
+CFLAGS_pwm-mtk-disp.o += -I$(XAGA_ROOT)/drivers/pwm -iquote$(XAGA_ROOT)/drivers/pwm -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

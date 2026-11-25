@@ -1,0 +1,16 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += flashlight.o
+flashlight-y := flashlight-core.o flashlight-device.o
+obj-m += mtk-composite.o
+CFLAGS_flashlight-core.o += -I$(XAGA_ROOT)/legacy-xaga-flashlight/drivers/misc/mediatek/flashlight -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling -I$(XAGA_ROOT)/drivers/misc/mediatek/pbm -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM
+CFLAGS_flashlight-device.o += -I$(XAGA_ROOT)/legacy-xaga-flashlight/drivers/misc/mediatek/flashlight -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling -I$(XAGA_ROOT)/drivers/misc/mediatek/pbm -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM
+CFLAGS_mtk-composite.o += -I$(XAGA_ROOT)/legacy-xaga-flashlight/drivers/misc/mediatek/flashlight -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling -I$(XAGA_ROOT)/drivers/misc/mediatek/pbm -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM
+
+# Device module selection.
+obj-m := flashlight.o mtk-composite.o
+
+# Per-object platform compilation context.
+CFLAGS_mtk-composite.o += -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM
+CFLAGS_flashlight-core.o += -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM
+CFLAGS_flashlight-device.o += -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM

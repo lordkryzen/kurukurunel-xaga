@@ -1,0 +1,6 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += lm3644.o
+obj-m += ktd2687.o
+CFLAGS_lm3644.o += -I$(XAGA_ROOT)/legacy-xaga-flashlight/drivers/misc/mediatek/flashlight -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling -I$(XAGA_ROOT)/drivers/misc/mediatek/pbm -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM
+CFLAGS_ktd2687.o += -I$(XAGA_ROOT)/legacy-xaga-flashlight/drivers/misc/mediatek/flashlight -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/power_throttling -I$(XAGA_ROOT)/drivers/misc/mediatek/pbm -D__XIAOMI_CAMERA__ -DCONFIG_MTK_FLASHLIGHT_PT -DCONFIG_MTK_FLASHLIGHT_PT_STRICT -DCONFIG_MTK_FLASHLIGHT_DLPT -DXAGA_CAM

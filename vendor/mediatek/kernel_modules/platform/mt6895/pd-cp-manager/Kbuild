@@ -1,0 +1,10 @@
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+CFLAGS_pd_cp_manager.o += -I$(XAGA_ROOT)/drivers/power/supply -iquote$(XAGA_ROOT)/drivers/power/supply -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/power_throttling -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/typec/tcpc/inc -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/usb/usb20/ -I$(DEVICE_MODULES_PATH)/drivers/power/supply/ufcs -I$(DEVICE_MODULES_PATH)/drivers/power/mca -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/power/mca
+obj-m += pd_cp_manager.o
+ccflags-y += -DCONFIG_TARGET_PRODUCT_XAGA
+
+# Device module selection.
+obj-m := pd_cp_manager.o
+
+# Per-object platform compilation context.
+CFLAGS_pd_cp_manager.o += -DCONFIG_TARGET_PRODUCT_XAGA

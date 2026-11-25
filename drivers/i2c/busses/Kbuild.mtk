@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += i2c-mt65xx.o
+CFLAGS_i2c-mt65xx.o += -I$(XAGA_ROOT)/drivers/i2c/busses -iquote$(XAGA_ROOT)/drivers/i2c/busses -I$(srctree)/$(src) -I$(srctree)/drivers/i2c/busses/ -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

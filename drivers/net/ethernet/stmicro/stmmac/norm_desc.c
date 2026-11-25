@@ -9,7 +9,7 @@
 *******************************************************************************/
 
 #include <linux/stmmac.h>
-#include "common.h"
+#include "common-mtk.h"
 #include "descs_com.h"
 
 static int ndesc_get_tx_status(struct stmmac_extra_stats *x,

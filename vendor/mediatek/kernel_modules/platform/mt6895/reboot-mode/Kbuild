@@ -1,0 +1,4 @@
+obj-m += reboot-mode.o
+
+# Device module selection.
+obj-m := reboot-mode.o

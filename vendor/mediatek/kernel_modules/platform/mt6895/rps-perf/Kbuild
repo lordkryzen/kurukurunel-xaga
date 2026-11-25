@@ -1,0 +1,7 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += rps_perf.o
+CFLAGS_rps_perf.o += -I$(XAGA_ROOT)/drivers/misc/mediatek/rps -iquote$(XAGA_ROOT)/drivers/misc/mediatek/rps -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := rps_perf.o

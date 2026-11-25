@@ -1,0 +1,3 @@
+# Retained xaga firmware uses legacy Trustonic transport, not FF-A.
+include $(src)/Makefile
+obj-m := mcDrvModule.o

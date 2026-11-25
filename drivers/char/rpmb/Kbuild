@@ -1,0 +1,5 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += rpmb.o
+rpmb-y := core.o
+CFLAGS_core.o += -I$(XAGA_ROOT)/drivers/char/rpmb -iquote$(XAGA_ROOT)/drivers/char/rpmb -I$(XAGA_ROOT)/drivers/char/rpmb/drrpmb_gp/public -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -D__CHECK_ENDIAN

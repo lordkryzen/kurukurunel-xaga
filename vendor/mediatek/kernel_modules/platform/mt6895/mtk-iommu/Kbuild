@@ -1,0 +1,7 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += mtk_iommu.o
+CFLAGS_mtk_iommu.o += -I$(XAGA_ROOT)/drivers/iommu -iquote$(XAGA_ROOT)/drivers/iommu -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi -I$(XAGA_ROOT)/drivers/misc/mediatek/iommu -I$(XAGA_ROOT)/drivers/iommu/arm/arm-smmu-v3 -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/aed -I$(XAGA_ROOT)/drivers/misc/mediatek/aee/mrdump  -I$(XAGA_ROOT)/drivers/misc/mediatek/smi -I$(XAGA_ROOT)/drivers/memory -I$(XAGA_ROOT)/drivers/misc/mediatek/mme -I$(XAGA_ROOT)/drivers/clk/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/mminfra -I$(XAGA_ROOT)/drivers/misc/mediatek/hwccf -I$(XAGA_ROOT)/drivers/misc/mediatek/hwccf/include -I$(XAGA_ROOT)/drivers/soc/mediatek -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/rv -I$(XAGA_ROOT)/drivers/misc/mediatek/vcp/include -I$(XAGA_ROOT)/drivers/misc/mediatek/smi/virtio_smi -I$(XAGA_ROOT)/drivers/memory/mediatek -I$(XAGA_ROOT)/drivers/hooks/geniezone_vendor_hooks -I$(XAGA_ROOT)/drivers/misc/mediatek/trusted_mem
+
+# Device module selection.
+obj-m := mtk_iommu.o

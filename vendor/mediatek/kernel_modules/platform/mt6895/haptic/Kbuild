@@ -1,0 +1,11 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += haptic.o
+haptic-y := aw_haptic.o aw8697.o aw86927.o ringbuffer.o
+CFLAGS_aw_haptic.o += -I$(XAGA_ROOT)/legacy-xaga-haptic -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_aw8697.o += -I$(XAGA_ROOT)/legacy-xaga-haptic -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_aw86927.o += -I$(XAGA_ROOT)/legacy-xaga-haptic -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+CFLAGS_ringbuffer.o += -I$(XAGA_ROOT)/legacy-xaga-haptic -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := haptic.o

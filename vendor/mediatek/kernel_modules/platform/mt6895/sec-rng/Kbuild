@@ -1,0 +1,7 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += sec-rng.o
+CFLAGS_sec-rng.o += -I$(XAGA_ROOT)/drivers/char/hw_random -iquote$(XAGA_ROOT)/drivers/char/hw_random -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := sec-rng.o

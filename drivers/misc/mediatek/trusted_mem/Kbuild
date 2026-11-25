@@ -1,0 +1,4 @@
+# Xaga reference uses the original Geniezone backend: no memory-ffa-enabled DT node.
+# Preserve the published Makefile source lists and flags; select one provider.
+include $(src)/Makefile
+obj-m := trusted_mem.o

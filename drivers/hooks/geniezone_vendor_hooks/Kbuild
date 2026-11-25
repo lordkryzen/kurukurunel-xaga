@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += gzvm_hooks.o
+CFLAGS_gzvm_hooks.o += -I$(XAGA_ROOT)/drivers/hooks/geniezone_vendor_hooks -iquote$(XAGA_ROOT)/drivers/hooks/geniezone_vendor_hooks -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi

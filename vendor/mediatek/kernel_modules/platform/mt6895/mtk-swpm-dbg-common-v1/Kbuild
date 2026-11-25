@@ -1,0 +1,25 @@
+LINUXINCLUDE := -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+provider := $(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/stack-integrated-modules
+ccflags-y += -I$(src) -I$(src)/inc -I$(src)/mtk_swpm_fs -I$(src)/modules/include -I$(src)/modules/include/v6895 -I$(src)/modules/debug/v1 -I$(src)/modules/debug/v6895
+ccflags-y += -I$(provider)/qos -I$(provider)/sspm -I$(provider)/thermal -I$(DEVICE_MODULES_PATH)/drivers/thermal/mediatek
+ccflags-y += -DMTK_SWPM_KERNEL_MODULE -Wall -Werror
+obj-m += mtk-swpm.o mtk-swpm-perf-arm-pmu.o mtk-swpm-dbg-common-v1.o mtk-swpm-dbg-v6895.o
+mtk-swpm-y := swpm_module.o swpm_module_ext.o mtk_swpm_fs/mtk_swpm_common_sysfs.o mtk_swpm_fs/mtk_swpm_sysfs_procfs.o
+mtk-swpm-perf-arm-pmu-y := swpm_perf_arm_pmu.o
+mtk-swpm-dbg-common-v1-y := modules/debug/v1/swpm_dbg_fs_common.o
+mtk-swpm-dbg-v6895-y := modules/debug/v6895/swpm_v6895.o modules/debug/v6895/swpm_v6895_ext.o modules/debug/v6895/swpm_v6895_dbg_init.o swpm_native_calibration.o
+
+# Device module selection.
+obj-m := mtk-swpm.o mtk-swpm-perf-arm-pmu.o mtk-swpm-dbg-v6895.o mtk-swpm-dbg-common-v1.o
+
+# Per-object platform compilation context.
+CFLAGS_swpm_module.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_swpm_module_ext.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_swpm_native_calibration.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_swpm_perf_arm_pmu.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_mtk_swpm_fs/mtk_swpm_common_sysfs.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_mtk_swpm_fs/mtk_swpm_sysfs_procfs.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_modules/debug/v1/swpm_dbg_fs_common.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_modules/debug/v6895/swpm_v6895.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_modules/debug/v6895/swpm_v6895_dbg_init.o += -DMTK_SWPM_KERNEL_MODULE
+CFLAGS_modules/debug/v6895/swpm_v6895_ext.o += -DMTK_SWPM_KERNEL_MODULE

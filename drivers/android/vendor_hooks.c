@@ -592,3 +592,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gzvm_destroy_vm_post_process);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_bio_charge);
+
+#include <trace/hooks/v4l2core.h>
+#include <trace/hooks/v4l2mc.h>
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_media_device_setup_link);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reserved_fmt_fields);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fill_ext_fmtdesc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_mask_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_v4l2subdev_set_fmt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_v4l2subdev_set_selection);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_v4l2subdev_set_frame_interval);

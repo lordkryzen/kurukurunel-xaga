@@ -12,7 +12,7 @@
   Author: Giuseppe Cavallaro <peppe.cavallaro@st.com>
 *******************************************************************************/
 
-#include "stmmac.h"
+#include "stmmac-mtk.h"
 
 static int jumbo_frm(struct stmmac_tx_queue *tx_q, struct sk_buff *skb,
 		     int csum)

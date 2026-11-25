@@ -1,0 +1,6 @@
+obj-m += vcp_native_bridge.o
+vcp_native_bridge-y := modern.o legacy.o
+ccflags-y += -I$(src) -I$(XAGA_ROOT)/vendor/mediatek/kernel_modules/compat/native-include -I$(XAGA_ROOT)/drivers/misc/mediatek/include -I$(XAGA_ROOT)/include/mediatek -I$(XAGA_ROOT)/include/mediatek/uapi
+
+# Device module selection.
+obj-m := vcp_native_bridge.o

@@ -1,0 +1,4 @@
+obj-m += usb_dp_selector.o
+
+# Device module selection.
+obj-m := usb_dp_selector.o

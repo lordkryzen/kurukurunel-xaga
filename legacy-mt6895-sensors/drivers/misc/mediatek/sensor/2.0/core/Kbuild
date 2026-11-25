@@ -1,0 +1,4 @@
+# Generated from pinned Xiaomi targets; per-source flags preserve module boundaries.
+LINUXINCLUDE :=  -I$(srctree)/include/mediatek -I$(srctree)/include/mediatek/uapi $(LINUXINCLUDE)
+obj-m += hf_manager.o
+CFLAGS_hf_manager.o += -I$(XAGA_ROOT)/legacy-mt6895-sensors/drivers/misc/mediatek/sensor/2.0/core -iquote$(XAGA_ROOT)/legacy-mt6895-sensors/drivers/misc/mediatek/sensor/2.0/core -I$(XAGA_ROOT)/legacy-mt6895-sensors/drivers/misc/mediatek/sensor/2.0/core -I$(XAGA_ROOT)/legacy-mt6895-sensors/drivers/misc/mediatek/sensor/2.0/sensorhub -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/scp/include -I$(XAGA_ROOT)/legacy-mt6895-audio/drivers/misc/mediatek/scp/rv -I$(XAGA_ROOT)/drivers/misc/mediatek/include -I$(XAGA_ROOT)/include/mediatek -I$(XAGA_ROOT)/include/mediatek/uapi
