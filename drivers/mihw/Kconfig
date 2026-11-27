@@ -51,3 +51,10 @@ config MI_MEMORY_MONITOR
 	  Report measured direct-reclaim latency and kswapd CPU time and
 	  frequency to Xiaomi memory diagnostics. Does not alter reclaim policy.
 
+config MI_THERMAL_INTERFACE
+	tristate "Xiaomi thermal userspace interface"
+	depends on OF && THERMAL && CPU_FREQ && POWER_SUPPLY
+	depends on DEVICE_MODULES_DRM_MEDIATEK
+	help
+	  Supply Xiaomi thermal state nodes, CPU maximum-frequency requests
+	  and primary-display and USB power-state notifications.

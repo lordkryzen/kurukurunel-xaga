@@ -309,3 +309,4 @@ minet.ko
 miwill.ko
 miwill_mode_redudancy.ko
 mi_memory_monitor.ko
+mi_thermal_interface.ko
