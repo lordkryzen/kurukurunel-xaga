@@ -17,6 +17,86 @@
 #define MI_THERMAL_DEVICE_NAME "thermal_message"
 #endif
 
+struct thermal_sensor_alias {
+	const char *name;
+	const char *source_name;
+	struct thermal_zone_device *source;
+	struct thermal_zone_device *zone;
+};
+
+static struct thermal_sensor_alias sensor_aliases[] = {
+	{ .name = "mtktsAP", .source_name = "ap_ntc" },
+	{ .name = "mtktsbtsmdpa", .source_name = "ltepa_ntc" },
+	{ .name = "mtktsbtsnrpa", .source_name = "nrpa_ntc" },
+};
+
+static int sensor_alias_get_temp(struct thermal_zone_device *zone, int *temp)
+{
+	struct thermal_sensor_alias *alias = thermal_zone_device_priv(zone);
+
+	return thermal_zone_get_temp(alias->source, temp);
+}
+
+static const struct thermal_zone_device_ops sensor_alias_ops = {
+	.get_temp = sensor_alias_get_temp,
+};
+
+static void sensor_aliases_destroy(void)
+{
+	int i;
+
+	for (i = ARRAY_SIZE(sensor_aliases) - 1; i >= 0; i--) {
+		struct thermal_sensor_alias *alias = &sensor_aliases[i];
+
+		if (alias->zone) {
+			thermal_zone_device_unregister(alias->zone);
+			alias->zone = NULL;
+		}
+		if (alias->source) {
+			put_device(thermal_zone_device(alias->source));
+			alias->source = NULL;
+		}
+	}
+}
+
+static int sensor_aliases_init(void)
+{
+	static const struct thermal_zone_params params = { .no_hwmon = true };
+	int i, ret;
+
+	/* Xaga's native thermal policy uses the shipped NTC sensor names. */
+	for (i = 0; i < ARRAY_SIZE(sensor_aliases); i++) {
+		struct thermal_sensor_alias *alias = &sensor_aliases[i];
+		struct thermal_zone_device *source;
+
+		source = thermal_zone_get_zone_by_name(alias->name);
+		if (!IS_ERR(source))
+			continue;
+		if (PTR_ERR(source) != -ENODEV) {
+			ret = PTR_ERR(source);
+			goto fail;
+		}
+		source = thermal_zone_get_zone_by_name(alias->source_name);
+		if (IS_ERR(source)) {
+			ret = PTR_ERR(source) == -ENODEV ? -EPROBE_DEFER : PTR_ERR(source);
+			goto fail;
+		}
+		get_device(thermal_zone_device(source));
+		alias->source = source;
+		alias->zone = thermal_zone_device_register_with_trips(alias->name,
+				NULL, 0, alias, &sensor_alias_ops, &params, 0, 0);
+		if (IS_ERR(alias->zone)) {
+			ret = PTR_ERR(alias->zone);
+			alias->zone = NULL;
+			goto fail;
+		}
+	}
+	return 0;
+fail:
+	sensor_aliases_destroy();
+	return ret;
+}
+
 static struct device *message_dev;
 static char board_sensor[128];
 static DEFINE_MUTEX(text_lock);
@@ -344,9 +424,12 @@ static int __init mi_thermal_interface_init(void)
 	zone_dev = get_device(thermal_zone_device(zone));
 	if (!zone_dev)
 		return -ENODEV;
-	ret = cpu_limits_init();
+	ret = sensor_aliases_init();
 	if (ret)
 		goto put_zone;
+	ret = cpu_limits_init();
+	if (ret)
+		goto destroy_aliases;
 	message_dev = device_create_with_groups(zone_dev->class, NULL, 0, NULL,
 			thermal_message_groups, MI_THERMAL_DEVICE_NAME);
 	if (IS_ERR(message_dev)) {
@@ -369,6 +452,8 @@ destroy_device:
 	device_unregister(message_dev);
 destroy_cpu:
 	cpu_limits_destroy();
+destroy_aliases:
+	sensor_aliases_destroy();
 put_zone:
 	put_device(zone_dev);
 	return ret;
@@ -381,6 +466,7 @@ static void __exit mi_thermal_interface_exit(void)
 	cancel_work_sync(&usb_work);
 	device_unregister(message_dev);
 	cpu_limits_destroy();
+	sensor_aliases_destroy();
 }
 
 module_init(mi_thermal_interface_init);
