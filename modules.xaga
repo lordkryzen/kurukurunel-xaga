@@ -300,3 +300,5 @@ ln8000_charger.ko
 sc8561.ko
 rt6160-regulator.ko
 fmradio_drv_connac2x.ko
+mtk-vow.ko
+mtk-scp-vow.ko

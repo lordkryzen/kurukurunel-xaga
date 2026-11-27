@@ -8,4 +8,4 @@ obj-$(CONFIG_MTK_USB_CONFIGFS_RNDIS) += usb-rndis/
 
 obj-m += rt6160-xaga/
 
-obj-m += fm/
+obj-m += fm/ vow/ vow-audio/

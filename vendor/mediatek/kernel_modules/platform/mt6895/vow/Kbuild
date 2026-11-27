@@ -1,0 +1,5 @@
+ccflags-y += -I$(src) -I$(srctree)/legacy-mt6895-audio/drivers/misc/mediatek/scp/include -I$(srctree)/include/mediatek -I$(srctree)/drivers/misc/mediatek/vow/ver02
+obj-m += mtk-vow.o
+mtk-vow-y := vow.o vow_scp.o
+ccflags-y += -I$(srctree)/drivers/misc/mediatek/scp/include -I$(srctree)/drivers/misc/mediatek/vow -I$(srctree)/drivers/misc/mediatek/include -I$(srctree)/include/mediatek
+ccflags-y += -I$(srctree)/include/mediatek

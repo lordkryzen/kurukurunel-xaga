@@ -1,0 +1,1 @@
+../../../../../../legacy-mt6895-audio/sound/soc/mediatek/vow/mtk-scp-vow.c
