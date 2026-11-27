@@ -3,3 +3,36 @@ config CACHE_PREFETCH
 	default n
 	help
 	  cache prefetch module
+
+config MI_MILLET
+	tristate "Xiaomi Millet notifications"
+	depends on ANDROID_BINDER_IPC && ANDROID_VENDOR_HOOKS
+	depends on CGROUP_FREEZER && NETFILTER && IPV6
+	depends on NF_SOCKET_IPV4 && NF_SOCKET_IPV6
+	help
+	  Report frozen-process Binder, signal and socket activity to the
+	  Millet userspace monitors. Support the framework core-UID and
+	  blacklist policy for native Binder thaw notifications.
+
+config MI_MEMORY_INFO
+	tristate "Xiaomi DDR and UFS identity"
+	depends on OF && SCSI_UFSHCD && PM
+	help
+	  Supply DDR and UFS identity through /proc/mv using bootloader
+	  memory metadata and standard UFS read descriptors.
+
+config MI_SLA
+	tristate "Xiaomi SLA traffic collector"
+	depends on INET && NETFILTER && PROC_FS
+	depends on NF_SOCKET_IPV4
+	help
+	  Collect per-interface packet timing and traffic information for
+	  Xiaomi network services. Does not change packet routing.
+
+config MI_MEMORY_MONITOR
+	tristate "Xiaomi reclaim and kswapd monitoring"
+	depends on TRACEPOINTS && TRACING && SYSFS && CPU_FREQ
+	help
+	  Report measured direct-reclaim latency and kswapd CPU time and
+	  frequency to Xiaomi memory diagnostics. Does not alter reclaim policy.
+

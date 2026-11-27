@@ -3357,7 +3357,6 @@ static void binder_transaction(struct binder_proc *proc,
 			return_error_line = __LINE__;
 			goto err_invalid_target_handle;
 		}
-		trace_android_vh_binder_trans(target_proc, proc, thread, tr);
 		if (security_binder_transaction(proc->cred,
 						target_proc->cred) < 0) {
 			binder_txn_error("%d:%d transaction credentials failed\n",
@@ -3367,6 +3366,7 @@ static void binder_transaction(struct binder_proc *proc,
 			return_error_line = __LINE__;
 			goto err_invalid_target_handle;
 		}
+		trace_android_vh_binder_trans(target_proc, proc, thread, tr);
 		binder_inner_proc_lock(proc);
 
 		w = list_first_entry_or_null(&thread->todo,
@@ -5866,19 +5866,32 @@ static void binder_add_freeze_work(struct binder_proc *proc, bool is_frozen)
 		binder_put_node(prev);
 }
 
+/* The caller must hold a live reference to proc and no Binder locks. */
+int binder_proc_unfreeze(struct binder_proc *proc)
+{
+	bool was_frozen;
+
+	if (!proc)
+		return -EINVAL;
+	binder_inner_proc_lock(proc);
+	was_frozen = proc->is_frozen;
+	proc->sync_recv = false;
+	proc->async_recv = false;
+	proc->is_frozen = false;
+	binder_inner_proc_unlock(proc);
+	binder_add_freeze_work(proc, false);
+	return was_frozen;
+}
+EXPORT_SYMBOL_GPL(binder_proc_unfreeze);
+
 static int binder_ioctl_freeze(struct binder_freeze_info *info,
 			       struct binder_proc *target_proc)
 {
 	int ret = 0;
 
 	if (!info->enable) {
-		binder_inner_proc_lock(target_proc);
-		target_proc->sync_recv = false;
-		target_proc->async_recv = false;
-		target_proc->is_frozen = false;
-		binder_inner_proc_unlock(target_proc);
-		binder_add_freeze_work(target_proc, false);
-		return 0;
+		ret = binder_proc_unfreeze(target_proc);
+		return ret < 0 ? ret : 0;
 	}
 
 	/*

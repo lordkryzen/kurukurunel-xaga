@@ -302,3 +302,7 @@ rt6160-regulator.ko
 fmradio_drv_connac2x.ko
 mtk-vow.ko
 mtk-scp-vow.ko
+millet.ko
+mi_memory_info.ko
+sla.ko
+mi_memory_monitor.ko

@@ -636,4 +636,6 @@ struct binder_object {
 	};
 };
 
+int binder_proc_unfreeze(struct binder_proc *proc);
+
 #endif /* _LINUX_BINDER_INTERNAL_H */
