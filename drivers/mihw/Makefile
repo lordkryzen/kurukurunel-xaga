@@ -6,3 +6,5 @@ obj-y                                   += cache_prefetch/
 obj-y += millet/
 obj-y += memory/
 obj-y += sla/
+obj-y += minet/
+obj-y += miwill/

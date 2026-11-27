@@ -305,4 +305,7 @@ mtk-scp-vow.ko
 millet.ko
 mi_memory_info.ko
 sla.ko
+minet.ko
+miwill.ko
+miwill_mode_redudancy.ko
 mi_memory_monitor.ko

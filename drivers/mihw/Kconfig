@@ -29,6 +29,21 @@ config MI_SLA
 	  Collect per-interface packet timing and traffic information for
 	  Xiaomi network services. Does not change packet routing.
 
+config MI_MINET
+	tristate "Xiaomi Minet per-UID traffic statistics"
+	depends on INET && IPV6 && NETFILTER && PROC_FS
+	depends on NF_SOCKET_IPV4 && NF_SOCKET_IPV6
+	help
+	  Supply bounded per-UID IP flow counters to Xiaomi network services.
+
+config MI_MIWILL
+	tristate "Xiaomi MiWiLL wireless link aggregation"
+	depends on INET && IPV6 && NETFILTER && NETDEVICES
+	depends on NF_SOCKET_IPV4 && NF_SOCKET_IPV6
+	help
+	  Supply the MiWiLL virtual interface, packet encapsulation and
+	  redundancy mode used by Xiaomi dual wireless network services.
+
 config MI_MEMORY_MONITOR
 	tristate "Xiaomi reclaim and kswapd monitoring"
 	depends on TRACEPOINTS && TRACING && SYSFS && CPU_FREQ
