@@ -1,3 +1,10 @@
 obj-$(CONFIG_MI_MEMORY_INFO) += mi_memory_info.o
 ccflags-y += -I$(srctree)/drivers/ufs/core
 obj-$(CONFIG_MI_MEMORY_MONITOR) += mi_memory_monitor.o
+ccflags-y += -I$(srctree)/vendor/mediatek/kernel_modules/platform/mt6895/mediatek-drm
+ccflags-y += -I$(srctree)/include/mediatek
+ccflags-y += -I$(srctree)/drivers/misc/mediatek/include/mt-plat -I$(srctree)/drivers/misc/mediatek/include
+ccflags-y += -I$(srctree)/drivers/misc/mediatek/mtk-interconnect -I$(srctree)/include/mediatek/drm
+ccflags-y += -I$(srctree)/vendor/mediatek/kernel_modules/compat/stack-integrated-modules/mml
+ccflags-y += -I$(srctree)/drivers/misc/mediatek/slbc
+ccflags-y += -I$(srctree)/drivers/gpu/drm/mediatek/dpc

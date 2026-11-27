@@ -13,12 +13,14 @@
 #include <linux/cpufreq.h>
 #include <linux/overflow.h>
 
+#include "mi_task_qos.h"
+
 #define TRACKED_TASKS 256
 #define SCENE_BYTES 64
 
 struct latency_stat { u64 count, total, maximum; };
 struct memory_stat {
- struct latency_stat direct, main;
+ struct latency_stat direct, main, qos;
  u64 running[NR_CPUS], runnable[NR_CPUS];
  u64 frequency_time[NR_CPUS], frequency_weight[NR_CPUS];
 };
@@ -26,7 +28,7 @@ struct tracked_task {
  struct task_struct *task;
  u64 start, epoch, window, running_since, queued_since;
  unsigned int depth, running_cpu;
- bool kswapd;
+ bool kswapd, qos;
 };
 static struct tracked_task tasks[TRACKED_TASKS];
 static unsigned int cpu_khz[NR_CPUS];
@@ -95,12 +97,14 @@ static void direct_begin(void *unused, int order, gfp_t flags)
  struct tracked_task *entry;
  unsigned long irqflags;
  u64 now;
+ bool qos;
  if (!READ_ONCE(enabled) || (test_uid && __kuid_val(current_uid()) != test_uid)) return;
  now = ktime_get_ns();
+ qos = task_qos_level(current) >= 6;
  spin_lock_irqsave(&stat_lock, irqflags);
  if (!enabled || exiting) goto out;
  entry = find_task(current, true, false);
- if (entry && !entry->depth++) entry->start = now;
+ if (entry && !entry->depth++) { entry->start = now; entry->qos = qos; }
 out:
  spin_unlock_irqrestore(&stat_lock, irqflags);
 }
@@ -120,9 +124,11 @@ static void direct_end(void *unused, unsigned long reclaimed)
  if (enabled && entry->epoch == epoch) {
   latency_add(&lifetime.direct, duration);
   if (main) latency_add(&lifetime.main, duration);
+  if (entry->qos) latency_add(&lifetime.qos, duration);
   if (window_enabled && entry->window == window_epoch) {
    latency_add(&window_stat.direct, duration);
    if (main) latency_add(&window_stat.main, duration);
+   if (entry->qos) latency_add(&window_stat.qos, duration);
   }
  }
  release = entry->task;
@@ -228,6 +234,7 @@ static void task_exit(void *unused, struct task_struct *task)
 {
  unsigned long flags;
  unsigned int i, refs = 0;
+ task_qos_exit(task);
  spin_lock_irqsave(&stat_lock, flags);
  for (i=0; i<TRACKED_TASKS; i++) if (tasks[i].task == task) {
   if (tasks[i].kswapd && running_kswapd[tasks[i].running_cpu] == &tasks[i]) running_kswapd[tasks[i].running_cpu] = NULL;
@@ -275,14 +282,13 @@ static ssize_t reset_store(struct kobject *k, struct kobj_attribute *a, const ch
 static u64 ms(u64 ns) { return min_t(u64,div_u64(ns,NSEC_PER_MSEC),INT_MAX); }
 static ssize_t direct_stat_show(struct kobject *k, struct kobj_attribute *a, char *buf)
 {
- struct memory_stat *snapshot; struct latency_stat *d,*m; unsigned long flags; ssize_t len;
+ struct memory_stat *snapshot; struct latency_stat *d,*m,*q; unsigned long flags; ssize_t len;
  snapshot=kmalloc(sizeof(*snapshot),GFP_KERNEL);if(!snapshot)return -ENOMEM;
  spin_lock_irqsave(&stat_lock,flags);
  *snapshot=!strcmp(a->attr.name,"history_direct_reclaim_stat")?lifetime:window_stat;
- spin_unlock_irqrestore(&stat_lock,flags);d=&snapshot->direct;m=&snapshot->main;
- /* Proprietary QoS classification is not inferred from a task's priority. */
- len=sysfs_emit(buf,"ALL_DR_CNT: %llu\nALL_max: %llu\nALL_avg: %llu\nMainThread_DR_CNT: %llu\nMainThread_max: %llu\nMainThread_avg: %llu\n",
- d->count,ms(d->maximum),ms(d->count?div64_u64(d->total,d->count):0),m->count,ms(m->maximum),ms(m->count?div64_u64(m->total,m->count):0));
+ spin_unlock_irqrestore(&stat_lock,flags);d=&snapshot->direct;m=&snapshot->main;q=&snapshot->qos;
+ len=sysfs_emit(buf,"ALL_DR_CNT: %llu\nALL_max: %llu\nALL_avg: %llu\nMainThread_DR_CNT: %llu\nMainThread_max: %llu\nMainThread_avg: %llu\nQOS_DR_CNT: %llu\nQOS_max: %llu\nQOS_avg: %llu\n",
+ d->count,ms(d->maximum),ms(d->count?div64_u64(d->total,d->count):0),m->count,ms(m->maximum),ms(m->count?div64_u64(m->total,m->count):0),q->count,ms(q->maximum),ms(q->count?div64_u64(q->total,q->count):0));
  kfree(snapshot);return len;
 }
 static ssize_t kswapd_stat_show(struct kobject *k, struct kobj_attribute *a, char *buf)
@@ -299,7 +305,7 @@ static ssize_t status_show(struct kobject *k, struct kobj_attribute *a, char *bu
 {
  unsigned long flags;u64 lost,orphans,runnable=0;unsigned int i,active=0;
  spin_lock_irqsave(&stat_lock,flags);lost=dropped;orphans=unmatched;for(i=0;i<TRACKED_TASKS;i++)active+=tasks[i].task!=NULL;for_each_possible_cpu(i)runnable=add_sat(runnable,lifetime.runnable[i]);spin_unlock_irqrestore(&stat_lock,flags);
- return sysfs_emit(buf,"qos_supported: 0\ntracked_tasks: %u\ndropped_starts: %llu\nexited_inflight: %llu\nkswapd_runnable_ms: %llu\n",active,lost,orphans,ms(runnable));
+ return sysfs_emit(buf,"qos_supported: 1\nqos_annotations: xr_fbt\nqos_inheritance: 0\ntracked_tasks: %u\ndropped_starts: %llu\nexited_inflight: %llu\nkswapd_runnable_ms: %llu\n",active,lost,orphans,ms(runnable));
 }
 static struct kobj_attribute enable_attr=__ATTR(enable,0644,enable_show,enable_store);
 static struct kobj_attribute scene_attr=__ATTR(enable_scene,0644,enable_scene_show,enable_scene_store);
@@ -342,6 +348,9 @@ static int __init monitor_init(void)
  }
  monitor_kobj=kobject_create_and_add(sysfs_name,kernel_kobj);if(!monitor_kobj){ret=-ENOMEM;goto fail;}
  ret=sysfs_create_group(monitor_kobj,&group);if(ret){kobject_put(monitor_kobj);goto fail;}
+ qos_device.name=qos_device_name;
+ ret=misc_register(&qos_device);
+ if(ret){sysfs_remove_group(monitor_kobj,&group);kobject_put(monitor_kobj);goto fail;}
  return 0;
 fail:
  WRITE_ONCE(enabled,false);remove_hooks();release_tasks();return ret;
@@ -349,9 +358,10 @@ fail:
 static void __exit monitor_exit(void)
 {
  unsigned long flags;
+ misc_deregister(&qos_device);
  sysfs_remove_group(monitor_kobj,&group);kobject_put(monitor_kobj);
  spin_lock_irqsave(&stat_lock,flags);exiting=true;enabled=false;spin_unlock_irqrestore(&stat_lock,flags);
- remove_hooks();release_tasks();
+ remove_hooks();release_tasks();task_qos_clear();
 }
 module_init(monitor_init);module_exit(monitor_exit);
 MODULE_DESCRIPTION("Reclaim latency and kswapd scheduling statistics");

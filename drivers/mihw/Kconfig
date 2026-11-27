@@ -15,11 +15,14 @@ config MI_MILLET
 	  blacklist policy for native Binder thaw notifications.
 
 config MI_MEMORY_INFO
-	tristate "Xiaomi DDR and UFS identity"
-	depends on OF && SCSI_UFSHCD && PM
+	tristate "Xiaomi DDR and UFS diagnostics"
+	depends on OF && SCSI_UFSHCD && PM && PROC_FS && SYSFS
+	depends on DRM && DEVICE_MODULES_DRM_MEDIATEK
 	help
-	  Supply DDR and UFS identity through /proc/mv using bootloader
-	  memory metadata and standard UFS read descriptors.
+	  Supply DDR and UFS identity through /proc/mv and read-only sysfs
+	  diagnostics using bootloader memory metadata, standard UFS device
+	  and health descriptors, host error counters and native Hynix health
+	  reports. Publish live display and memory status for hwconf readers.
 
 config MI_SLA
 	tristate "Xiaomi SLA traffic collector"
@@ -49,7 +52,9 @@ config MI_MEMORY_MONITOR
 	depends on TRACEPOINTS && TRACING && SYSFS && CPU_FREQ
 	help
 	  Report measured direct-reclaim latency and kswapd CPU time and
-	  frequency to Xiaomi memory diagnostics. Does not alter reclaim policy.
+	  frequency to Xiaomi memory diagnostics. Accept native xr_fbt task
+	  annotations for QoS reclaim classification. Does not change scheduler
+	  priority or implement inherited QoS policy.
 
 config MI_THERMAL_INTERFACE
 	tristate "Xiaomi thermal userspace interface"
