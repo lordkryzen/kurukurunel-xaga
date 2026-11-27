@@ -843,7 +843,7 @@ retry:
     return soc;
 }
 
-static int fg_read_real_temp(struct bq_fg_chip *bq)
+static int fg_read_real_temp(struct bq_fg_chip *bq, int standard_temp)
 {
     u16 tbat = 0;
     int ret = 0;
@@ -852,14 +852,12 @@ static int fg_read_real_temp(struct bq_fg_chip *bq)
         return bq->fake_tbat;
 
     ret = fg_read_word(bq, bq->regs[BQ_FG_REG_REAL_TEMP], &tbat);
-    if (ret < 0) {
-        fg_err("%s failed to read REAL_TEMP\n", bq->log_tag);
+    if (ret < 0 || !tbat) {
+        /* Older gauge firmware does not provide the separate real-TBAT word. */
+        return standard_temp;
     }
 
     fg_err("%s read FG real TBAT = %d\n", bq->log_tag, tbat);
-    if (!tbat)
-        tbat = 2980;
-
     return tbat - 2730;
 }
 
@@ -2279,7 +2277,7 @@ static void fg_update_status(struct bq_fg_chip *bq)
     bq->ibat = fg_read_current(bq);
     tbat_temp = fg_read_temperature(bq);
     bq->tbat = get_median(tbat_temp);
-    bq->rtbat = fg_read_real_temp(bq);
+    bq->rtbat = fg_read_real_temp(bq, tbat_temp);
     fg_read_volt(bq);
     fg_read_status(bq);
     if (bq->dynamic_shutdown_voltage_support) {
