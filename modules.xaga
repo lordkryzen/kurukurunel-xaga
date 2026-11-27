@@ -299,3 +299,4 @@ mtk_usb_f_rndis.ko
 ln8000_charger.ko
 sc8561.ko
 rt6160-regulator.ko
+fmradio_drv_connac2x.ko
